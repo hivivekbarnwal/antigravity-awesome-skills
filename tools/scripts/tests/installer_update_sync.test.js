@@ -31,6 +31,38 @@ function readManifestEntries(targetDir) {
 const tmpRoot = fs.mkdtempSync(path.join(os.tmpdir(), "installer-update-sync-"));
 
 try {
+  const linkedTarget = path.join(tmpRoot, "hardlink-manifest-target");
+  fs.mkdirSync(linkedTarget);
+  const outsideManifest = path.join(tmpRoot, "outside-manifest.json");
+  const originalManifest = '{"entries":[]}';
+  fs.writeFileSync(outsideManifest, originalManifest);
+  fs.linkSync(outsideManifest, path.join(linkedTarget, ".antigravity-install-manifest.json"));
+  for (const action of [
+    () => installer.readInstallManifest(linkedTarget),
+    () => installer.writeInstallManifest(linkedTarget, ["skill-a"]),
+    () => installer.buildDryRunTargetPlan({ name: "Linked", path: linkedTarget }, ["skill-a"]),
+  ]) assert.throws(action, /unsafe install manifest/i);
+  assert.equal(fs.readFileSync(outsideManifest, "utf8"), originalManifest,
+    "manifest writes must never truncate an external hardlinked file");
+
+  const atomicTarget = path.join(tmpRoot, "atomic-manifest-target");
+  fs.mkdirSync(atomicTarget);
+  installer.writeInstallManifest(atomicTarget, ["original-skill"]);
+  const atomicManifest = path.join(atomicTarget, ".antigravity-install-manifest.json");
+  const beforeFailure = fs.readFileSync(atomicManifest, "utf8");
+  const rename = fs.renameSync;
+  try {
+    fs.renameSync = (source, destination) => {
+      if (destination === atomicManifest) throw new Error("controlled manifest replacement failure");
+      return rename(source, destination);
+    };
+    assert.throws(() => installer.writeInstallManifest(atomicTarget, ["replacement-skill"]), /controlled manifest replacement failure/);
+  } finally { fs.renameSync = rename; }
+  assert.equal(fs.readFileSync(atomicManifest, "utf8"), beforeFailure);
+  assert.deepEqual(fs.readdirSync(atomicTarget), [".antigravity-install-manifest.json"]);
+  fs.writeFileSync(atomicManifest, Buffer.alloc(1024 * 1024 + 1));
+  assert.throws(() => installer.readInstallManifest(atomicTarget), /unsafe install manifest/i);
+
   const repoV1 = path.join(tmpRoot, "repo-v1");
   const repoV2 = path.join(tmpRoot, "repo-v2");
   const targetDir = path.join(tmpRoot, "target");
@@ -38,6 +70,11 @@ try {
 
   createFakeRepo(repoV1, ["skill-a", "skill-b"]);
   createFakeRepo(repoV2, ["skill-a"]);
+  fs.writeFileSync(
+    path.join(repoV1, "skills", "skill-a", "removed-script.sh"),
+    "#!/usr/bin/env bash\necho legacy\n",
+    "utf8",
+  );
   writeSkill(
     repoV1,
     path.join("nested", "skill-c"),
@@ -65,6 +102,11 @@ try {
     installer.buildInstallSelectors({ categoryArg: "backend" }),
   );
   assert.strictEqual(
+    fs.existsSync(path.join(targetDir, "skill-a", "removed-script.sh")),
+    false,
+    "updates must remove files that disappeared from a still-managed skill",
+  );
+  assert.strictEqual(
     fs.existsSync(path.join(targetDir, "skill-a")),
     false,
     "non-matching top-level skills should be pruned during filtered updates",
@@ -77,7 +119,7 @@ try {
   assert.ok(fs.existsSync(path.join(targetDir, "nested", "skill-c", "SKILL.md")));
   assert.deepStrictEqual(
     readManifestEntries(targetDir),
-    ["docs", "nested/skill-c"],
+    ["docs", path.join("nested", "skill-c")],
     "install manifest should mirror the latest filtered install entries",
   );
 
@@ -109,7 +151,7 @@ try {
   );
   assert.deepStrictEqual(
     readManifestEntries(legacyTargetDir),
-    ["docs", "nested/skill-c"],
+    ["docs", path.join("nested", "skill-c")],
     "legacy manifest entries should be normalized after update",
   );
 

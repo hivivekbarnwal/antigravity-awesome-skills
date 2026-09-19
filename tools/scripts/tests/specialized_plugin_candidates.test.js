@@ -6,7 +6,7 @@ const { findProjectRoot } = require("../../lib/project-root");
 const projectRoot = findProjectRoot(__dirname);
 const candidatesPath = path.join(projectRoot, "data", "specialized-plugin-candidates.json");
 const bundlesPath = path.join(projectRoot, "data", "editorial-bundles.json");
-const skillsIndexPath = path.join(projectRoot, "data", "skills_index.json");
+const skillsIndexPath = path.join(projectRoot, "skills_index.json");
 const codexMarketplacePath = path.join(projectRoot, ".agents", "plugins", "marketplace.json");
 const claudeMarketplacePath = path.join(projectRoot, ".claude-plugin", "marketplace.json");
 
@@ -35,13 +35,18 @@ for (const candidate of candidates) {
   const bundle = bundlesById.get(candidate.id);
   assert.ok(bundle, `candidate ${candidate.id} must be enabled in data/editorial-bundles.json`);
   assert.strictEqual(bundle.name, candidate.name, `candidate ${candidate.id} bundle name should match`);
+  assert.strictEqual(bundle.why, candidate.why, `candidate ${candidate.id} should carry candidate rationale into bundles`);
+  assert.ok(
+    Array.isArray(bundle.defaultPrompts) && bundle.defaultPrompts.length >= 2,
+    `candidate ${candidate.id} should include productized default prompts`,
+  );
   assert.deepStrictEqual(
     bundle.skills.map((skill) => skill.id),
     candidate.skills,
     `candidate ${candidate.id} bundle skills should match the candidate manifest`,
   );
 
-  const pluginRoot = path.join(projectRoot, "plugins", `antigravity-bundle-${candidate.id}`);
+  const pluginRoot = path.join(projectRoot, "plugins", `agentic-bundle-${candidate.id}`);
   assert.ok(fs.existsSync(pluginRoot), `candidate ${candidate.id} plugin directory should exist`);
   assert.ok(
     fs.existsSync(path.join(pluginRoot, ".codex-plugin", "plugin.json")),
@@ -52,11 +57,15 @@ for (const candidate of candidates) {
     `candidate ${candidate.id} should have a Claude plugin manifest`,
   );
   assert.ok(
-    codexPluginNames.has(`agyb-${candidate.id}`),
+    fs.existsSync(path.join(pluginRoot, "plugin.json")),
+    `candidate ${candidate.id} should have an Agent Plugins manifest`,
+  );
+  assert.ok(
+    codexPluginNames.has(`aasb-${candidate.id}`),
     `candidate ${candidate.id} should be listed in the Codex marketplace`,
   );
   assert.ok(
-    claudePluginNames.has(`antigravity-bundle-${candidate.id}`),
+    claudePluginNames.has(`agentic-bundle-${candidate.id}`),
     `candidate ${candidate.id} should be listed in the Claude marketplace`,
   );
 

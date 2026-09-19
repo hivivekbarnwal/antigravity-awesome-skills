@@ -831,6 +831,18 @@ def coerce_metadata_text(value):
         return value
     return str(value)
 
+
+def coerce_metadata_list(value):
+    if isinstance(value, set):
+        values = [coerce_metadata_text(item) for item in sorted(value, key=str)]
+    elif isinstance(value, (list, tuple)):
+        values = [coerce_metadata_text(item) for item in value]
+    elif isinstance(value, str):
+        values = value.split(",") if "," in value else value.split()
+    else:
+        return []
+    return list(dict.fromkeys(item.strip() for item in values if item and item.strip()))
+
 def parse_frontmatter(content):
     """
     Parses YAML frontmatter, sanitizing unquoted values containing @.
@@ -930,8 +942,17 @@ def generate_index(skills_dir, output_file, compatibility_report=None):
             description = coerce_metadata_text(metadata.get("description"))
             risk = coerce_metadata_text(metadata.get("risk"))
             source = coerce_metadata_text(metadata.get("source"))
+            source_type = coerce_metadata_text(metadata.get("source_type"))
+            source_repo = coerce_metadata_text(metadata.get("source_repo"))
+            license_value = coerce_metadata_text(metadata.get("license"))
+            license_source = coerce_metadata_text(metadata.get("license_source"))
             date_added = coerce_metadata_text(metadata.get("date_added"))
             category = coerce_metadata_text(metadata.get("category"))
+            tags_value = metadata.get("tags")
+            nested_metadata = metadata.get("metadata")
+            if tags_value is None and isinstance(nested_metadata, Mapping):
+                tags_value = nested_metadata.get("tags")
+            tags = coerce_metadata_list(tags_value)
 
             if name is not None:
                 skill_info["name"] = name
@@ -941,8 +962,18 @@ def generate_index(skills_dir, output_file, compatibility_report=None):
                 skill_info["risk"] = risk
             if source is not None:
                 skill_info["source"] = source
+            if source_type is not None:
+                skill_info["source_type"] = source_type
+            if source_repo is not None:
+                skill_info["source_repo"] = source_repo
+            if license_value is not None:
+                skill_info["license"] = license_value
+            if license_source is not None:
+                skill_info["license_source"] = license_source
             if date_added is not None:
                 skill_info["date_added"] = date_added
+            if tags:
+                skill_info["tags"] = tags
             
             # Category: prefer frontmatter, then folder structure, then conservative inference
             if category is not None:

@@ -1,11 +1,13 @@
 ---
 title: Jetski/Cortex + Gemini Integration Guide
-description: "Use antigravity-awesome-skills with Jetski/Cortex without hitting context-window overflow with 1,595+ skills."
+description: "Use agentic-awesome-skills with Jetski/Cortex without hitting context-window overflow with 2,130+ skills."
 ---
 
-# Jetski/Cortex + Gemini: safe integration with 1,595+ skills
+# Jetski/Cortex + Gemini: safe integration with 2,130+ skills
 
-This guide shows how to integrate the `antigravity-awesome-skills` repository with an agent based on **Jetski/Cortex + Gemini** (or similar frameworks) **without exceeding the model context window**.
+> **Custom-host integration:** This guide documents a low-level, direct-manifest lazy loader for Jetski/Cortex and similar hosts. For Codex or Claude Code, the recommended path is [AAS Core](../users/aas-core.md), which provides neutral, deterministic catalog retrieval and validates exact agent-selected IDs through a bounded, read-only MCP server.
+
+This guide shows how to integrate the `agentic-awesome-skills` repository with an agent based on **Jetski/Cortex + Gemini** (or similar frameworks) **without exceeding the model context window**.
 
 The common error seen in Jetski/Cortex is:
 
@@ -23,7 +25,7 @@ Never do:
 - concatenate all `SKILL.md` content into a single system prompt;
 - re-inject the entire library for **every** request.
 
-With 1,595+ skills, this approach fills the context window before user messages are even added, causing truncation.
+With 2,130+ skills, this approach fills the context window before user messages are even added, causing truncation.
 
 ---
 
@@ -277,4 +279,4 @@ To prevent recurrence:
 - Load skills **on demand** based on `@skill-id`.
 - Set clear limits (max skills per turn, token threshold).
 
-Following this pattern, Jetski/Cortex + Gemini can use the full `antigravity-awesome-skills` library safely, at scale, and within modern model context-window limits.
+Following this pattern, Jetski/Cortex + Gemini can use the full `agentic-awesome-skills` library safely, at scale, and within modern model context-window limits.

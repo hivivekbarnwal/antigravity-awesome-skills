@@ -8,6 +8,8 @@ const execSync = vi.fn((command) => {
   if (command === 'git --version') return '';
   if (command === 'git rev-parse --git-dir') return '.git';
   if (command === 'git remote') return 'origin\nupstream\n';
+  if (command === 'git status --porcelain') return '';
+  if (command === 'git branch --show-current') return 'main';
   if (command === 'git rev-parse HEAD') return 'abc123';
   if (command === 'git fetch upstream main') return '';
   if (command === 'git rev-parse upstream/main') return 'abc123';
@@ -110,17 +112,43 @@ async function loadRefreshHandler() {
   };
 
   refreshSkillsPlugin().configureServer(server);
-  const registration = registrations.find((item) => item.path === '/api/refresh-skills');
-  if (!registration) {
+  const apiHandlers = registrations
+    .filter((item) => item.path === '/api/refresh-skills')
+    .map((item) => item.handler);
+  if (!apiHandlers.length) {
     throw new Error('refresh-skills handler not registered');
   }
-  return registration.handler;
+  return async (req, res) => {
+    let index = 0;
+    const next = async () => {
+      const handler = apiHandlers[index++];
+      if (handler) await handler(req, res, next);
+    };
+    await next();
+  };
 }
 
 describe('refresh-skills plugin security', () => {
   beforeEach(() => {
     execSync.mockClear();
+    process.env.ENABLE_LOCAL_SKILLS_SYNC = 'true';
     delete process.env.SKILLS_REFRESH_TOKEN;
+  });
+
+  it('rejects sync unless the server-side opt-in is enabled', async () => {
+    delete process.env.ENABLE_LOCAL_SKILLS_SYNC;
+    const handler = await loadRefreshHandler();
+    const req = {
+      method: 'POST',
+      headers: { host: 'localhost:5173', origin: 'http://localhost:5173' },
+      socket: { remoteAddress: '127.0.0.1' },
+    };
+    const res = createResponse();
+
+    await handler(req, res);
+
+    expect(res.statusCode).toBe(403);
+    expect(JSON.parse(res.body).error).toMatch('disabled');
   });
 
   it('rejects GET requests for the sync endpoint', async () => {
@@ -255,11 +283,70 @@ describe('refresh-skills plugin security', () => {
     expect(JSON.parse(res.body).success).toBe(true);
   });
 
+  it('refuses to mutate a dirty checkout', async () => {
+    execSync.mockImplementation((command) => {
+      if (command === 'git --version') return '';
+      if (command === 'git rev-parse --git-dir') return '.git';
+      if (command === 'git remote') return 'origin\nupstream\n';
+      if (command === 'git status --porcelain') return ' M skills/example/SKILL.md\n';
+      return '';
+    });
+
+    const handler = await loadRefreshHandler();
+    const req = {
+      method: 'POST',
+      headers: { host: 'localhost:5173', origin: 'http://localhost:5173' },
+      socket: { remoteAddress: '127.0.0.1' },
+    };
+    const res = createResponse();
+
+    await handler(req, res);
+
+    expect(res.statusCode).toBe(500);
+    expect(JSON.parse(res.body).error).toMatch('uncommitted changes');
+    expect(execSync).not.toHaveBeenCalledWith('git fetch upstream main', expect.anything());
+  });
+
+  it('creates a rollback ref before a fast-forward merge', async () => {
+    execSync.mockImplementation((command) => {
+      if (command === 'git --version') return '';
+      if (command === 'git rev-parse --git-dir') return '.git';
+      if (command === 'git remote') return 'origin\nupstream\n';
+      if (command === 'git status --porcelain') return '';
+      if (command === 'git branch --show-current') return 'main';
+      if (command === 'git rev-parse HEAD') return 'abc123';
+      if (command === 'git fetch upstream main') return '';
+      if (command === 'git rev-parse upstream/main') return 'def456';
+      if (command.startsWith('git update-ref refs/aas-sync-backup/')) return '';
+      if (command === 'git merge upstream/main --ff-only') return '';
+      return '';
+    });
+
+    const handler = await loadRefreshHandler();
+    const req = {
+      method: 'POST',
+      headers: { host: 'localhost:5173', origin: 'http://localhost:5173' },
+      socket: { remoteAddress: '127.0.0.1' },
+    };
+    const res = createResponse();
+
+    await handler(req, res);
+
+    expect(res.statusCode).toBe(200);
+    expect(JSON.parse(res.body).rollbackRef).toMatch(/^refs\/aas-sync-backup\//);
+    expect(execSync).toHaveBeenCalledWith(
+      expect.stringMatching(/^git update-ref refs\/aas-sync-backup\/\d+ abc123$/),
+      expect.anything(),
+    );
+  });
+
   it('does not reset local repository state when fast-forward sync fails', async () => {
     execSync.mockImplementation((command) => {
       if (command === 'git --version') return '';
       if (command === 'git rev-parse --git-dir') return '.git';
       if (command === 'git remote') return 'origin\nupstream\n';
+      if (command === 'git status --porcelain') return '';
+      if (command === 'git branch --show-current') return 'main';
       if (command === 'git rev-parse HEAD') return 'abc123';
       if (command === 'git fetch upstream main') return '';
       if (command === 'git rev-parse upstream/main') return 'def456';
@@ -316,11 +403,11 @@ describe('refresh-skills plugin security', () => {
       validateArchiveEntryName,
     } = await import('../../refresh-skills-plugin.js');
 
-    expect(validateArchiveEntryName('antigravity-awesome-skills-main/skills/demo/SKILL.md')).toBe(true);
+    expect(validateArchiveEntryName('agentic-awesome-skills-main/skills/demo/SKILL.md')).toBe(true);
     expect(validateArchiveEntryName('../outside')).toBe(false);
     expect(validateArchiveEntryName('/tmp/outside')).toBe(false);
     expect(validateArchiveEntryName('other-root/skills/demo/SKILL.md')).toBe(false);
-    expect(() => assertSafeArchiveEntries(['antigravity-awesome-skills-main/../../outside'])).toThrow(
+    expect(() => assertSafeArchiveEntries(['agentic-awesome-skills-main/../../outside'])).toThrow(
       'Unsafe archive entry path',
     );
   });
@@ -330,7 +417,7 @@ describe('refresh-skills plugin security', () => {
 
     expect(() =>
       assertSafeArchiveEntries(
-        ['antigravity-awesome-skills-main/skills/demo -> /tmp/outside'],
+        ['agentic-awesome-skills-main/skills/demo -> /tmp/outside'],
         { rejectSymlinks: true },
       ),
     ).toThrow('Unsafe archive symlink entry');
@@ -348,15 +435,15 @@ describe('refresh-skills plugin security', () => {
       fs.writeFileSync(
         archivePath,
         createTarGzip([
-          { name: 'antigravity-awesome-skills-main/' },
-          { name: 'antigravity-awesome-skills-main/skills/demo/SKILL.md', data: 'demo' },
+          { name: 'agentic-awesome-skills-main/' },
+          { name: 'agentic-awesome-skills-main/skills/demo/SKILL.md', data: 'demo' },
         ]),
       );
       const entries = readTarGzipEntries(archivePath);
 
       expect(entries.map((entry) => entry.name)).toEqual([
-        'antigravity-awesome-skills-main/',
-        'antigravity-awesome-skills-main/skills/demo/SKILL.md',
+        'agentic-awesome-skills-main/',
+        'agentic-awesome-skills-main/skills/demo/SKILL.md',
       ]);
       expect(() => assertSafeArchiveEntries(entries, { rejectLinks: true })).not.toThrow();
     } finally {
@@ -377,7 +464,7 @@ describe('refresh-skills plugin security', () => {
         archivePath,
         createTarGzip([
           {
-            name: 'antigravity-awesome-skills-main/link',
+            name: 'agentic-awesome-skills-main/link',
             type: '2',
             linkName: '/tmp/outside',
           },
@@ -414,10 +501,10 @@ describe('refresh-skills plugin security', () => {
           {
             name: '././@LongLink',
             type: 'L',
-            data: 'antigravity-awesome-skills-main/skills/demo/SKILL.md\0',
+            data: 'agentic-awesome-skills-main/skills/demo/SKILL.md\0',
           },
           {
-            name: 'antigravity-awesome-skills-main/skills/demo/SKILL.md',
+            name: 'agentic-awesome-skills-main/skills/demo/SKILL.md',
             data: 'demo',
           },
         ]),
