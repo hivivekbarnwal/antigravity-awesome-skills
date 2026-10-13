@@ -86,37 +86,30 @@ describe('Home', () => {
       renderWithRouter(<Home />, { useProvider: false });
 
       await waitFor(() => {
-        expect(document.title).toContain('AAS Core Preview');
+        expect(document.title).toContain('Skill Catalog');
       });
 
       expect(screen.getByRole('heading', {
         level: 1,
-        name: /AAS Core: agent-first skill stacks for Codex, Claude Code, and compatible clients/i,
+        name: /Find the skills for your next project./i,
       })).toBeInTheDocument();
-      expect(screen.getByText(/Search\. Choose\. Validate\. Preview\./i)).toBeInTheDocument();
-      expect(screen.getByRole('link', { name: /Review an AAS Core stack/i })).toHaveAttribute('href', '/workbench/');
-      expect(screen.getByText(/What is the difference between skills and MCP tools/i)).toBeInTheDocument();
+      expect(screen.getByText(/Compare a few candidates/)).toBeInTheDocument();
+      expect(screen.getByRole('navigation', { name: 'Catalog views' })).toBeInTheDocument();
+      expect(screen.queryByText(/What is the difference between skills and MCP tools/i)).not.toBeInTheDocument();
       expect(document.querySelector('meta[property="og:title"]')).toHaveAttribute(
         'content',
-        expect.stringContaining('AAS Core Preview'),
+        expect.stringContaining('Skill Catalog'),
       );
     });
 
-    it('routes the primary catalog action to exact composition', async () => {
-      (useSkills as Mock).mockReturnValue({
-        skills: [],
-        stars: {},
-        loading: false,
-        error: null,
-      });
-
+    it('keeps named collections in a separate catalog view', async () => {
+      (useSkills as Mock).mockReturnValue({ skills: [], stars: {}, loading: false, error: null });
       renderWithRouter(<Home />, { useProvider: false });
-
-      await waitFor(() => {
-        expect(screen.getByRole('link', { name: /Review an AAS Core stack/i })).toBeInTheDocument();
-      });
-
-      expect(screen.getByText(/Inspect evidence, select exact IDs/i)).toBeInTheDocument();
+      fireEvent.click(screen.getByRole('button', { name: 'My collections' }));
+      expect(screen.getByRole('heading', { name: 'Your saved collections.' })).toBeInTheDocument();
+      expect(screen.queryByRole('searchbox', { name: 'Search skills' })).not.toBeInTheDocument();
+      fireEvent.click(screen.getByRole('button', { name: 'Skills' }));
+      expect(screen.getByRole('searchbox', { name: 'Search skills' })).toBeInTheDocument();
     });
   });
 
@@ -229,8 +222,8 @@ describe('Home', () => {
 
       await waitFor(() => {
         expect(screen.queryByRole('button', { name: /Sync Skills/i })).not.toBeInTheDocument();
-        expect(screen.getByText(/Public catalog mode/i)).toBeInTheDocument();
-        expect(screen.getByText(/maintainer-only workflow/i)).toBeInTheDocument();
+        expect(screen.queryByText(/Public catalog mode/i)).not.toBeInTheDocument();
+        expect(screen.queryByText(/maintainer-only workflow/i)).not.toBeInTheDocument();
       });
     });
   });
@@ -399,6 +392,28 @@ describe('Home', () => {
       fireEvent.click(screen.getByRole('button', { name: 'go back' }));
       await waitFor(() => expect(screen.getByText('@Frontend A')).toBeInTheDocument());
       expect(screen.queryByText('@Backend A')).not.toBeInTheDocument();
+    });
+
+    it('falls back from unsupported URL filters instead of hiding the catalog', async () => {
+      const skill = createMockSkill({
+        id: 'visible-skill',
+        name: 'Visible Skill',
+        category: 'frontend',
+        risk: 'safe',
+        source_type: 'official',
+      });
+
+      renderCatalog([
+        '/?category=not-a-category&risk=not-a-risk&source=not-a-source&scope=not-a-scope&sort=not-a-sort',
+      ], 0, [skill]);
+
+      await waitFor(() => expect(screen.getByText('@Visible Skill')).toBeInTheDocument());
+      expect(screen.getByLabelText('Filter by category')).toHaveValue('all');
+      expect(screen.getByLabelText('Filter by risk')).toHaveValue('all');
+      expect(screen.getByLabelText('Filter by source')).toHaveValue('all');
+      expect(screen.getByLabelText('Filter by shortlist')).toHaveValue('all');
+      expect(screen.getByLabelText('Sort skills')).toHaveValue('default');
+      await waitFor(() => expect(screen.getByTestId('location')).toHaveTextContent(/^\/$/));
     });
   });
 

@@ -1,3 +1,87 @@
+## Complete agent setup and skill-page corrections (October 12, 2026)
+
+Completed the Codex and Claude Code guides through configuration preview, digest-bound approval with backups, client connection checks, first agent-owned selection, validation/plan review and a separate direct-installer preview. Shared command generation keeps both guides pinned to the same release. Corrected 18 template descriptions without changing their bodies or IDs and added a narrow regression gate to the existing validator.
+
+Skill instructions now precede related content. Copy SKILL.md copies the original file without optional prompt context; catalog-return navigation preserves query and filters, including subsequent similar-skill navigation. Topic cards use public summaries instead of internal editorial intent.
+
+Validation: 132 repository test groups, 312 web tests/coverage, production build/prerender, typecheck, changed-source lint, references/security, 0/0 warning budget and zero root dependency vulnerabilities. Published 19.5.0 was exercised with both temporary host configurations and actual MCP stdio through reading, composition, validation, planning and installer-preview preparation. No native agent session or user configuration was changed. See [the scoped review](docs/maintainers/agent-setup-catalog-review-2026-10-12.md) for exact fingerprints, checks and residual corpus debt. Generated distributions remain owned by canonical sync.
+
+## Core-first UX, selected visual direction (October 11, 2026)
+
+Implemented the user's third displayed design as the Core homepage: one primary setup action, a navigable recorded example, and contextual Codex/Claude setup links. The example renders actual committed historical manifest/plan data and discloses its v16.7.0 catalog when inspected; it performs no live AI or project writes. The homepage is outside CatalogRouteProvider, avoiding initial catalog requests and persistence initialization.
+
+Reduced primary navigation to Catalog, Docs, and For teams. Catalog now separates skills, packs, workflows, and named collections; repeated product/technical/FAQ sections were removed from skill search. Core/CLI/MCP reference and the plan reviewer are accessible through documentation and contextual actions. Preserved /aas-core/ and its old section anchors through redirects; sitemap removes the duplicate overview and prerender/SEO copy now reflects the product/catalog distinction. Existing filters, saved selections, collections and public routes remain supported. No dependency or runtime service is added.
+
+Validation: 301 web tests in 52 files, coverage, typecheck, production build/prerender, 27-guide and production SEO verification, changed-source lint, chain, reference/documentation security checks and 132 local repository test groups passed. Design QA compared the selected image and browser render at 1487 x 1058 and tested 390px mobile reflow. See design-qa.md for comparison iterations, assets, purposeful behavior and evidence limits. Generated sitemap is excluded from the source PR.
+
+## Catalog discovery, collections, and Core overview (October 11, 2026)
+
+The catalog now groups and searches every category without hiding canonical categories, collapses advanced matching/risk/source controls, and keeps the selected count and review links available while browsing. Optional workflow and outcome explorers follow results. A guided goal/agent path links existing editorial packs and workflows without automatic selection. Browser-local named collections preserve version labels and exact IDs, support notes and explicit file import/export, reject invalid or oversized data, and report storage failures. Imports append new identities without overwriting saved lists; unavailable IDs remain inspectable and cannot be added to the working shortlist.
+
+The single /aas-core/ page explains Core, the CLI, and local stdio MCP together, including agent-owned choice, persistence, non-applying planning, Workbench review, and separate installation boundaries. It links canonical technical guides and appears in the primary navigation and sitemap. New informational routes remain outside the legacy migration set. Privacy describes local collection notes and export/import. No dependency, model call, database, account, or runtime service is added.
+
+Validation: 297 web tests across 52 files, coverage, typecheck, production build/prerender and documentation verification passed. All 132 local repository test groups, skill/reference validation and documentation security passed. Changed-source lint passed; full-app lint retains the two pre-existing Workbench effect errors. Browser checks verified catalog search, save/edit/reload/export of a named collection, import preview, guided agent/goal links and focused workflow opening, the Core overview, and 390px mobile layouts without horizontal overflow. Generated sitemap is excluded from the source PR.
+
+## Team adoption and transparency (October 11, 2026)
+
+Added a three-step Start here section, static /teams/ and /trust/ pages, Catalog navigation, and visible Privacy/Terms/Security links. Team guidance links existing setup and Core documentation without adding installation commands or services. New informational routes stay outside the legacy bridge, preserving its existing curated route lock; a regression verifies their exclusion. Both pages share their copy with the static prerender and appear in the sitemap. Corrected MIT/CC BY 4.0 distinctions and hosted privacy disclosures for Vercel, Supabase public counts, local persistence, and shared links. Analytics URLs omit searches and fragments; no custom events or new dependencies were added.
+
+# Homepage discovery and shareable shortlists - 2026-10-11
+
+- Added a homepage search form, explicit goal/category links, and an agent-specific setup-guide selector using the existing catalog and documentation routes.
+- Added [shared selections](apps/web-app/src/pages/SharedSelection.tsx) with bounded, versioned URL fragments containing only canonical skill IDs. No accounts, database, new dependencies, or paid external services were added.
+- Shared links are inspected in memory. Saving is explicit and merges with the existing browser shortlist; missing IDs and catalog-version drift remain visible. Project goals, targets, and imported artifacts are excluded from shared URLs. These are discovery selections, not validated Core stacks.
+- Added malformed/oversized-link, clipboard-fallback, stale-link, explicit-save, storage-failure, and existing-shortlist-preservation tests.
+- Validation: repository validation and reference checks, documentation security, 132 repository test groups, web coverage suite, type checking, production build, and lint on changed source files. Full-app lint still reports the two unchanged `set-state-in-effect` errors in Workbench and PluginWorkbench.
+- Browser verification: homepage search to the catalog, selection-link creation and opening, desktop layout, and a 390px mobile viewport. Publication and live production verification are separate from this implementation evidence.
+
+# Top skills contributors - 2026-09-27
+
+- Added a second Top Contributors ranking for canonical skills introduced, alongside the existing commit ranking.
+- Counted each current `skills/**/SKILL.md` once at its first introduction in repository history, resolved commit authors to GitHub accounts, and excluded the requested accounts.
+
+# README structure refresh - 2026-09-27
+
+- Shortened the README entry path while retaining the introduction video, dynamic skill count, sponsors, source credits, top contributors, repository contributors, and star history.
+- Preserved the existing installation anchors used by user guides and updated README metadata sync to keep the new release copy and examples current.
+- Verified heading hierarchy, table-of-contents anchors, repository documentation links, source-credit preservation, validation, docs security, consistency, and the full test suite.
+
+# README Top Contributors - 2026-09-27
+
+- Added a Top Contributors section beside the repository contributor gallery, with linked GitHub avatars and profiles.
+- Ranked the ten eligible accounts by GitHub contributor commit counts observed on September 27, 2026.
+- Simplified the section introduction after feedback so the README focuses on thanking contributors.
+
+# Catalog category completion - 2026-09-27
+
+- Audited the exact `main` catalog at commit `c6c0677`; it contains 2,472 skills, including 359 `uncategorized` entries.
+- Used Jev as an advisory structured classifier with a closed vocabulary of existing catalog categories, then manually reviewed low-confidence and placeholder-description cases.
+- Added `data/category-overrides.json` with 359 maintainer-reviewed assignments and applied it during index generation.
+- Regenerated the index/catalog validation snapshot: 2,472 records and 0 `uncategorized` entries.
+- Passed `npm run validate`, `npm run validate:references`, `npm run security:docs`, and `npm run check:aas-v1-catalog`.
+
+# Documentation experience — 2026-09-26
+
+- Added full-text guide search with highlighted excerpts, individual guide loading, clipboard feedback, accessible code scrolling, breadcrumbs, an active outline, and contextual next steps.
+- Exposed Git-derived dates and exact source links, plus paths for users, contributors, maintainers, Core reference, and troubleshooting.
+- Added article/breadcrumb structured data, real guide sitemap dates, and social images for Getting Started, AAS Core, and FAQ.
+- Made local Markdown targets, images, heading anchors, static route content, and social image checks part of the web build.
+- See the [verification record](docs/maintainers/site-documentation-experience-2026-09-26.md) for checks, accessibility scope, and the external Mintlify limitation.
+- This change does not change the package version or create a release.
+
+# Public AAS info endpoint - 2026-09-25
+
+- Added a generated `apps/web-app/public/api/info.json` endpoint for public AAS name, links, release version, feature list, and current skill count.
+- Generate the count from the canonical `skills_index.json` during the existing web asset setup, so development and Pages builds use the same current catalog without a manually maintained number.
+- Keep the generated endpoint out of source PRs; the Pages build publishes it at `https://aaskills.tech/api/info.json`.
+
+# Jev Social skill intake - 2026-09-21
+
+- Added [`skills/jev-social/SKILL.md`](skills/jev-social/SKILL.md), adapted from the MIT-licensed [`socai-io/jev-social`](https://github.com/socai-io/jev-social) Agent Skill.
+- Kept the workflow read-only and capability-gated: it checks local readiness, uses typed Jev routing and the socai CLI, distinguishes search cards from opened evidence, and stops at login, verification, challenge, or rate-limit boundaries.
+- Pinned executable examples to the full commit behind `v0.1.2` (`794aac59dbef0929ec57f2650504f4231fef598e`), excluded its moving `releases/latest` onboarding installer, and documented download approval, credential, browser-session, prompt-injection, and output-redaction requirements.
+- Added the required community source credit in [`README.md`](README.md). Generated catalogs, indexes, plugin mirrors, and marketplace artifacts remain excluded from the contributor diff.
+
 # Full Snyk group reconciliation — 2026-09-06
 
 - Exported all 551 analytics rows and read all live project/issue records; distinguished stale CLI snapshots, mirror copies, and current findings.
@@ -622,6 +706,8 @@
 - Set the README immediate community-support target to EUR 100 per month with an explicit recurring Buy Me a Coffee route. This monthly target is separate from the annual grant proposal.
 - Preserved the existing project identifiers, funding channel, and dated adoption evidence.
 
+Validation: production build/typecheck and 281 web tests (47 files) passed, as did repository validation, reference checks, documentation security, and the full local test suite. Changed-source lint passed. Browser checks verified both informational pages and a 390px layout without horizontal overflow.
+
 ## 2026-09-05 — Complete skill metadata dates
 
 - Added the historical Git introduction date to every canonical skill that lacked `date_added`.
@@ -698,3 +784,66 @@ Moved [Support the Project](README.md#support-the-project) directly below the op
 - Require SoupSieve 2.8.4 or newer alongside BeautifulSoup in junta-leiloeiros to exclude CVE-2026-49477.
 - Generated plugin mirrors are validated locally and remain owned by protected canonical synchronization.
 - Validation: repository chain, reference validation and docs security passed; Pillow 12.3.0 GIF creation/reopening and SoupSieve 2.8.4 selector smoke passed. Snyk EU found no security vulnerabilities in either resolved requirements set; junta-leiloeiros retains a certifi MPL-2.0 license-policy finding.
+
+# AAS social preview refresh — 2026-09-24
+
+- Replaced `apps/web-app/public/social-card.png` with the first generated AAS Core social preview, matching the live site's dark and cyan visual identity and current Search → Choose → Validate → Preview flow.
+- Kept the existing Open Graph and Twitter image URL stable so shared links resolve to the refreshed asset after deployment.
+- Resampled the social card to the site's required 1200 × 630 pixel dimensions after the first deployment validation flagged the generated source dimensions.
+- Updated the provenance record and SEO verifier to bind the selected image's actual visible copy and SHA-256.
+
+# AAS introduction video — 2026-09-25
+
+- Added the 40-second AAS presentation to the README through a GitHub video attachment, rendered inline by GitHub.
+- Added a self-hosted HTML video player to the catalog landing page, with a poster and no automatic download or playback.
+- Added a README link to the site's player as a fallback for GitHub playback stalls.
+
+
+## Homepage outage repair (2026-09-27)
+
+The landing route used useSkills outside CatalogRouteProvider, crashing the deployed homepage. Move it inside the existing provider route and exercise the real App homepage without mocking the context.
+
+
+## Shared site style (2026-09-27)
+
+Use the landing black/cyan palette on every route, share Outfit/JetBrains Mono with Tailwind and Markdown, load the title weight, unify responsive page headings, and keep header/footer appearance stable across navigation.
+
+## Vercel OSS site migration (2026-09-28)
+
+Configure the repository root as the Vercel project root. `vercel.json` installs both
+package trees, runs the existing web asset setup and build, serves the generated
+`apps/web-app/dist` directory, and falls back to the SPA entry for routes that
+are not prerendered. The Vercel Open Source Program badge is in the README.
+
+Keep `https://aaskills.tech/` as the public canonical URL. Deploy and check a
+Vercel preview first, attach the domain to the Vercel project, then update its
+DNS records. Keep the existing GitHub Pages custom-domain setting and verify
+that `https://sickn33.github.io/agentic-awesome-skills/` and representative
+deep links still redirect to the canonical URL after the DNS change. If GitHub
+Pages stops redirecting them, publish a dedicated redirect artifact there
+before considering the migration complete.
+
+## Unified AAS local plugin preparation (2026-10-02)
+
+Bundle three native workflow skills, the complete catalog and supporting files,
+read-only stdio Core, an offline artifact CLI, and single-file Workbench. Runtime
+requires only Node.js 22 or later on the user computer. No endpoint, cloud database,
+credentials, npm download, or hosted fallback is used. Local runtime identities
+bind bundled bytes; they do not assert verification of an npm release tarball.
+
+The experimental Upstash resource and all three previews containing the hosted
+MCP were removed. Production and DNS were never changed. Source configuration
+returns the existing website to its baseline build without a plugin Function.
+
+Validation includes a relocated package with networking denied: real SDK stdio
+catalog reading, composition/inspection, evidence, process isolation, Workbench
+resource, offline planning and audit. Focused Workbench browser tests pass with
+no fetch and no installer handoff. Root validation, references, documentation
+security, warning budget and full repository tests pass. Codex CLI installation passed with a temporary isolated configuration; native
+UI rendering remains unverified. Generated outputs stay excluded from
+this source PR and belong to protected canonical synchronization.
+
+
+## Core homepage introduction and maintainer restoration (2026-10-11)
+
+Restore the existing locally hosted 40-second introduction video after Core setup, with native controls, its original poster, and no preloading or autoplay. Restore the bottom Maintained by @sickn33 strip, existing local avatar, original licensing notice and GitHub star link. Keep the Core-first hero and navigation intact; responsive styles stack the strip on mobile. No new external service or dependency is added.

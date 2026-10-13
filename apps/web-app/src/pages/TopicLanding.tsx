@@ -27,7 +27,7 @@ export function TopicLanding(): React.ReactElement {
         </p>
         <div className="mt-6 flex flex-wrap justify-center gap-3">
           <Link
-            to="/"
+            to="/core"
             className="inline-flex items-center justify-center rounded-lg bg-slate-900 px-4 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-slate-800 dark:bg-slate-100 dark:text-slate-900 dark:hover:bg-white"
           >
             Browse all skills
@@ -60,9 +60,6 @@ export function TopicLanding(): React.ReactElement {
           </h1>
           <p className="mt-5 max-w-3xl text-base leading-relaxed text-slate-600 dark:text-slate-300">
             {page.summary}
-          </p>
-          <p className="mt-4 max-w-3xl text-sm leading-relaxed text-slate-500 dark:text-slate-400">
-            {page.primaryIntent}
           </p>
           <div className="mt-6 flex flex-wrap gap-3">
             {page.links.map((link) => link.to ? (
@@ -151,7 +148,7 @@ export function TopicLanding(): React.ReactElement {
             </p>
           </div>
           <Link
-            to="/"
+            to="/core"
             className="inline-flex items-center justify-center gap-2 rounded-lg bg-slate-900 px-4 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-slate-800 dark:bg-slate-100 dark:text-slate-900 dark:hover:bg-white"
           >
             <Icon name="search" size={16} className="h-4 w-4" />

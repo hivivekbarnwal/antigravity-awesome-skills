@@ -7,6 +7,1092 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [19.5.0] - 2026-10-12 - "Design Systems, Token Discipline And Verified Sources"
+
+> Adds **10** reviewed skills for native iOS and frontend UI work, design-system documentation, screenshot-to-UI matching, UI state coverage, token-lean coding-agent habits, terse Cockney delivery, timestamped YouTube and podcast quote research, official statistics lookups, and a digest-pinned progressive-headshot studio; it also refreshes Jet Browser to v0.9.0 and ships the Core-first product homepage with guided discovery and collections. Ships **2,687** skills.
+
+A catalog release for Claude Code, Cursor, Codex CLI, Gemini CLI, and related AI coding assistants. It includes the protected maintainer batch merged after `19.4.0`, with existing installation interfaces preserved.
+
+### Start here
+
+- Install: `npx agentic-awesome-skills@19.5.0`
+- [Choose your tool](README.md#choose-your-tool)
+- [Best skills by tool](README.md#best-skills-by-tool)
+- [Bundles](docs/users/bundles.md)
+- [Workflows](docs/users/workflows.md)
+
+### Added
+
+- **build-ui** - a step-by-step UI workflow: read the project, follow the plan that fits the job (new screen, dashboard, polish, simplify, review), then render, fix and check again at phone and desktop widths. `risk: safe`, MIT, official source [uxkin/agent](https://github.com/uxkin/agent).
+- **ios-screens** - build iPhone screens that feel native: tab bars and navigation stacks, sheets and detents, safe areas, Dynamic Type, dark mode, permissions, paywalls and empty states, checked on small and large iPhones. `risk: safe`, MIT, official source [uxkin/agent](https://github.com/uxkin/agent).
+- **write-design-md** - write or update a project's DESIGN.md from the colors, type scale, spacing, shapes and components it really uses, with agent-facing rules so new screens match and near-duplicates are surfaced as open questions. `risk: safe`, MIT, official source [uxkin/agent](https://github.com/uxkin/agent).
+- **ui-from-screenshot** - turn a screenshot or mockup into matching UI built from the project's own components, compare the rendered result side by side with the image, and fix the differences. `risk: safe`, MIT, official source [uxkin/agent](https://github.com/uxkin/agent).
+- **ui-states** - design and build the states generated UI usually forgets: first use, empty, loading, partial, error, offline, validation, permission, success, long content and busy actions. `risk: safe`, MIT, official source [uxkin/agent](https://github.com/uxkin/agent).
+- **arcmira-find-quotes** - search indexed YouTube and podcast transcripts for quotes, speakers and clip boundaries, then cite the episode, date and timestamped source link through an existing authorized Arcmira connection. `risk: safe`, Apache-2.0, official source [arcmira/mcp](https://github.com/arcmira/mcp).
+- **tokenleak** - token-lean working rules for coding agents: locate before reading, compute instead of reading data, bound command output, never re-read, batch independent calls, and prefer diffs over whole files, without trading away verification. `risk: safe`, MIT, official source [Pazificateur69/tokenleak](https://github.com/Pazificateur69/tokenleak).
+- **cockney** - a cheeky Cockney coding mode that returns terse replies and the smallest correct change, and switches back to plain English for security and destructive-action warnings. `risk: safe`, MIT, community source [Kadajett/cockney](https://github.com/Kadajett/cockney).
+- **invokely-statistics** - find official statistical figures, series, comparisons and place rankings through the Invokely MCP server and report each value with its indicator, period, unit and source citation. `risk: safe`, MIT, community source [estevecastells/awesome-copilot](https://github.com/estevecastells/awesome-copilot).
+- **ai-headshot-studio** - install and use the official AI Headshot Generator package, pinned by digest, for paid hosted work on the Beatra service, with self-update disabled before first use and an approval per paid call. `risk: critical`, MIT-0, official source [beatra-ai/ai-headshot-generator-skill](https://github.com/beatra-ai/ai-headshot-generator-skill).
+
+### Changed
+
+- **jet-browser** - refresh the skill to v0.9.0 (commit `b086730`): the published manifest now carries native `linux/amd64` and `linux/arm64` images, so the ARM guidance and every pinned source or release link were updated to the new tag. `risk: safe` is preserved.
+
+### Site and catalog
+
+- Core is the product homepage, with guided discovery, skill collections, shared-shortlist review for team adoption and clearer information pages; informational routes are accepted by the SEO verifier and sitemap.
+
+### Credits
+
+- **@UXKIN** for `build-ui`, `ios-screens`, `write-design-md`, `ui-from-screenshot` and `ui-states`
+- **@zealous1** for `arcmira-find-quotes`
+- **@Pazificateur69** for `tokenleak`
+- **@Kadajett** for `cockney`
+- **@estevecastells** for `invokely-statistics`
+- **@beatra-ai** for `ai-headshot-studio`
+- **@IRONICBo** for the Jet Browser v0.9.0 refresh
+
+## [19.4.0] - 2026-10-11 - "Prompt Handoffs And Cost-Gated Scaling"
+
+> Adds **2** reviewed skills for turning a rough request into a clear prompt for another agent and for proving a data/AI workflow end to end on a tiny sample before scaling; it also refreshes the Datacircle LinkedIn lookup skill with the Fetchin provider, corrects the OrcaPromptVault artifact wording, and ships guided discovery, collections and a Core overview on the hosted catalog. Ships **2,677** skills.
+
+A catalog release for Claude Code, Cursor, Codex CLI, Gemini CLI, and related AI coding assistants. It includes the protected maintainer batch merged after `19.3.0`, with existing installation interfaces preserved.
+
+### Start here
+
+- Install: `npx agentic-awesome-skills@19.4.0`
+- [Choose your tool](README.md#choose-your-tool)
+- [Best skills by tool](README.md#best-skills-by-tool)
+- [Bundles](docs/users/bundles.md)
+- [Workflows](docs/users/workflows.md)
+
+### Added
+
+- **kernel-prompt** - turn a rough request or draft into a clear, self-contained prompt for another agent: read the context it mentions, ask one round of decisions only the user can make, then return only the prompt and never perform the task it describes. `risk: safe`, MIT, community source [codegiveness/kernel-prompt](https://github.com/codegiveness/kernel-prompt).
+- **skeleton-first** - prove a data/AI/agent workflow end to end on the smallest input with the cheapest settings, look for cheap wins in the sample (duplicates, boilerplate, invalid inputs that are still billed), then scale in cost-gated rungs within a stated budget and keep a run log of cost and decisions. `risk: safe`, self-authored source.
+
+### Changed
+
+- **datacircle** - add Fetchin as the third LinkedIn profile provider (price, limit, request, response and `404`), use HarvestAPI or Fetchin past Up2Data's daily limit, correct Up2Data's per-profile price, and drop the retired `get_invite_link` MCP tool from the skill. `risk: critical` is preserved.
+- **glasser** - add a source parameter to the maintained setup-instruction link so the provider can see which listings agents follow; the link target and installation-approval guidance are unchanged. `risk: critical` is preserved.
+- **system-prompt-lookup** - correct the second artifact label to "captured off the wire or reported by the model itself", so a model's account of its own prompt is not presented as vendor-published material. `risk: safe` is preserved.
+
+### Site and catalog
+
+- Guided discovery, skill collections and a Core overview on the hosted catalog, plus shared-shortlist review for team adoption and clearer information pages.
+
+### Credits
+
+- **@codegiveness** for `kernel-prompt`
+- **@danhe6** for `skeleton-first`
+- **@waynehamadi** for the Datacircle Fetchin provider update
+- **@glasserai** for the Glasser setup-instruction link
+- **@xizhuomengcontin** for the OrcaPromptVault wording correction
+- **@markqian** for the openCanviz official source
+
+## [19.3.0] - 2026-10-10 - "Design Research, Reverse Engineering And Art QR Codes"
+
+> Adds **4** reviewed skills for real-product design research, evidence-led reverse engineering of shipped software, paid LinkedIn profile lookups with per-call consent, and branded art QR codes; it also refreshes the 1human motion skill for the current human-controlled onboarding. Ships **2,675** skills.
+
+A catalog release for Claude Code, Cursor, Codex CLI, Gemini CLI, and related AI coding assistants. It includes the protected maintainer batch merged after `19.2.0`, with existing installation interfaces preserved.
+
+### Start here
+
+- Install: `npx agentic-awesome-skills@19.3.0`
+- [Choose your tool](README.md#choose-your-tool)
+- [Best skills by tool](README.md#best-skills-by-tool)
+- [Bundles](docs/users/bundles.md)
+- [Workflows](docs/users/workflows.md)
+
+### Added
+
+- **uxkin-research** - research how real products handle a screen, flow or visual style before designing it: search UXKIN's library of real iOS screens, user journeys and website design systems, compare several and report the shared pattern. `risk: safe`, MIT, official source [uxkin/agent](https://github.com/uxkin/agent).
+- **reverse-engineer-anything** - investigate shipped apps, binaries, packages and runtimes with evidence-first routing: ASAR/Electron, archives, Android, managed assemblies, firmware, native targets and passive runtime observation, with provider limits and unknowns kept explicit. `risk: safe`, MIT, community source [morluto/rea](https://github.com/morluto/rea).
+- **datacircle** - look up LinkedIn profiles by URL through Datacircle (Up2Data or HarvestAPI, no markup) over its hosted MCP server or REST API, stating the cost and waiting for the user's yes before every paid lookup. `risk: critical`, self-authored source.
+- **qrx** - make branded, print-ready art QR codes that always scan through the hosted QRX MCP server or REST API, plus list, check and re-point existing codes; never asks for a Wi-Fi password and never prints the API key. `risk: critical`, MIT, official source [qrxcodes/qrx-mcp](https://github.com/qrxcodes/qrx-mcp).
+
+### Changed
+
+- **agent-reels** - refresh the 1human motion skill for the current human-controlled onboarding: discovery-only invitations, explicit workspace-install and upload-scope approval, reserved runtime identities, and separate private password setup. `risk: critical` is preserved; no account, billing or background automation was added.
+
+### Credits
+
+- **@UXKIN** for `uxkin-research`
+- **@morluto** for `reverse-engineer-anything`
+- **@waynehamadi** for `datacircle`
+- **@MattDavies** for the `qrx` official source and credit
+- **@mdagnolops** for the `agent-reels` refresh
+
+## [19.2.0] - 2026-10-09 - "Market Data And Change-Safety Skills"
+
+> Adds **6** reviewed skills for US stock-market data, change-impact proof, frontend visual gating, human-expert asks, browser-runtime verification and URL-to-Markdown fetching. Ships **2,671** skills.
+
+A catalog release for Claude Code, Cursor, Codex CLI, Gemini CLI, and related AI coding assistants. It includes the protected maintainer batch merged after `19.1.0`, with existing installation interfaces preserved.
+
+### Start here
+
+- Install: `npx agentic-awesome-skills@19.2.0`
+- [Choose your tool](README.md#choose-your-tool)
+- [Best skills by tool](README.md#best-skills-by-tool)
+- [Bundles](docs/users/bundles.md)
+- [Workflows](docs/users/workflows.md)
+
+### Added
+
+- **equibles** - query US stock-market data (SEC filing search, XBRL statements, earnings-call transcripts, insider and 13F holdings, congressional trades, short interest and daily prices) through the Equibles MCP server or REST API. `risk: safe`, self-authored source.
+- **what-could-break** - find what a change breaks outside its own diff and prove the one fact that makes it safe by running real code. `risk: safe`, MIT, community source [stas4000/what-could-break](https://github.com/stas4000/what-could-break), includes material adapted from pstack by Lauren Tan.
+- **tastegate** - build or fix a frontend so it looks designed, then prove it in a real browser: renders at phone and desktop width and fails on overlap, sideways scroll, low contrast and AI-slop defaults. `risk: safe`, MIT, community source [stas4000/tastegate](https://github.com/stas4000/tastegate); direction rules derive from taste-skill (MIT) and the craft floor from impeccable (Apache-2.0).
+- **url-to-markdown** - fetch a public webpage as clean Markdown for reading, summarizing, quoting, or citing while preserving the source URL. `risk: safe`, MIT, official source [replynodes/replynodes-agent-skills](https://github.com/replynodes/replynodes-agent-skills).
+- **ask-human-expert** - ask real executives, operators and domain experts a question through Instant Expert for a written answer, voice note or a short call, with a free test mode and explicit approval before any paid order. `risk: critical`, MIT-0, official source [Instant-Expert/skills](https://github.com/Instant-Expert/skills).
+- **jet-browser** - verify or integrate Jet Browser for isolated WPE WebKit browser sessions with native input, semantic DOM inspection, ordered JSONL automation and screenshots, pinned to a reviewed commit. `risk: critical`, Apache-2.0, official source [masakaai/jet-browser](https://github.com/masakaai/jet-browser).
+
+### Credits
+
+- **@daniel3303** for `equibles`
+- **@stas4000** for `what-could-break` and `tastegate`
+- **@replynodes-ai** for `url-to-markdown`
+- **@maxko87** for `ask-human-expert`
+- **@IRONICBo** for `jet-browser`
+- **@makeev** for the AlphAI official-source credit
+
+## [19.1.0] - 2026-10-08 - "Publishing, Data And QA Skills"
+
+> Adds **7** reviewed skills for website publishing, paid data APIs, social-link reading, email marketing, Telegram ad buying, motion references and local web-page QA. Ships **2,665** skills.
+
+A catalog release for Claude Code, Cursor, Codex CLI, Gemini CLI, and related AI coding assistants. It includes the protected maintainer batch merged after `19.0.1`, plus a web-app dependency upgrade.
+
+### Start here
+
+- Install: `npx agentic-awesome-skills@19.1.0`
+- [Choose your tool](README.md#choose-your-tool)
+- [Best skills by tool](README.md#best-skills-by-tool)
+- [Bundles](docs/users/bundles.md)
+- [Workflows](docs/users/workflows.md)
+
+### Added
+
+- **shipvela-publish** - publish an explicitly selected website through a connected Shipvela MCP account: stage only public build files, hand manifest approval to the owner, track the exact deployment and return the live URL. `risk: critical`, MIT, community source [stefanautomateed/shipvela-codex](https://github.com/stefanautomateed/shipvela-codex).
+- **looot** - search, price and run 2,500+ data API endpoints (work emails, company search, SERP, web pages) from one prepaid balance through the looot MCP server. `risk: critical`, MIT, official source [loootai/looot-skills](https://github.com/loootai/looot-skills).
+- **linkdigest-social-link-reader** - read a public Xiaohongshu, Douyin, TikTok, YouTube, X or WeChat link into text (caption, transcript, image text, key points) through the LinkDigest REST API or MCP server. `risk: safe`, MIT, official source [jcaiagent7143-ui/linkdigest-mcp](https://github.com/jcaiagent7143-ui/linkdigest-mcp).
+- **email-marketing-bible** - data-backed email marketing for agents: automation flows, deliverability triage, copy de-slopping and design direction, with ESP control behind explicit send-approval gates and compliance coverage. `risk: critical`, MIT, official source [CosmoBlk/email-marketing-bible](https://github.com/CosmoBlk/email-marketing-bible).
+- **telegram-channel-ads** - vet and price Telegram channel posts on real views instead of subscriber count, with reach benchmarks by size, topic and language, ad-network checks and CPM math. `risk: safe`, self-authored source.
+- **agent-reels** - find credited animation and video references on 1human and consult a private library shared by a human and their creative agent; publishing and social actions require prior owner authorization. `risk: critical`, MIT, community source [mdagnolops/1human-reels](https://github.com/mdagnolops/1human-reels).
+- **assay** - deterministic local QA for a web page you just wrote: opens it in a real browser, drives every control and reports where the page contradicts itself, with no API key and no network. `risk: safe`, MIT, community source [awss1i/assay](https://github.com/awss1i/assay).
+
+### Changed
+
+- **apps/web-app** - upgrade `react-router` to `8.4.0`. The web-app audit reports 0 vulnerabilities and all 268 web-app tests pass.
+- **Dependencies** - refresh bundled Node example dependency manifests under `skills/loki-mode`, `skills/telegram` and `skills/whatsapp-cloud-api`.
+
+### Credits
+
+- **@stefanautomateed** for `shipvela-publish`
+- **@walidboulanouar** for `looot`
+- **@jcaiagent7143-ui** for `linkdigest-social-link-reader`
+- **@CosmoBlk** for `email-marketing-bible`
+- **@Courier-Britva** for `telegram-channel-ads`
+- **@mdagnolops** for `agent-reels`
+- **@awss1i** for `assay`
+
+## [19.0.1] - 2026-10-06 - "Pages Surface Repair"
+
+> Patch release. Clears two web-app dependency advisories that blocked the `v19.0.0` release-tag Pages deployment. No catalog or skill changes.
+
+### Fixed
+
+- **apps/web-app** - pin `proxy-addr` to `^2.0.8` (critical: IP spoofing via IPv4-mapped IPv6 trust subnet, GHSA-jqcg-44mw-7w3h) and `source-map-js` to `^1.2.2` (high: event-loop denial of service via indexed source-map section offsets, GHSA-68fv-2mgg-jv7q). `npm --prefix apps/web-app audit --audit-level=high` now reports 0 vulnerabilities, and 268 web-app tests pass.
+
+## [19.0.0] - 2026-10-06 - "Security And Community Signals"
+
+> Adds **6** reviewed skills for security triage, single-cell analysis, SEO/AI visibility, session handoff, and structured decision-making. Advances the fourth bundled dependency to the current patch line. Ships **2,658** skills.
+
+A catalog release for Claude Code, Cursor, Codex CLI, Gemini CLI, and related AI coding assistants. It includes the complete protected maintainer batch merged after `18.15.0`, with existing installation interfaces preserved.
+
+### Start here
+
+- Install: `npx agentic-awesome-skills@19.0.0`
+- [Choose your tool](README.md#choose-your-tool)
+- [Best skills by tool](README.md#best-skills-by-tool)
+- [Bundles](docs/users/bundles.md)
+- [Workflows](docs/users/workflows.md)
+
+### Added
+
+- **darkmoon-pentest (#1797)** - start, follow and triage authorized autonomous AI pentest runs on a self-hosted Darkmoon Pro instance through its MCP server. Authorization-first workflow with a mandatory confirmation gate before any probing action. `risk: offensive`, GPL-3.0-only, from [ASCIT31/darkmoon-mcp-server](https://github.com/ASCIT31/darkmoon-mcp-server).
+- **scarf-single-cell (#1798)** - analyze single-cell RNA-seq at million-cell scale with Scarf: out-of-core Zarr stores, provenance-tracked artifacts, audited QC, clustering, markers and donor comparisons. `risk: critical`, BSD-3-Clause, official source [NygenAnalytics/scarf](https://github.com/NygenAnalytics/scarf).
+- **session-handoff (#1796)** - produce a structured handoff artifact (goal state, decisions, files touched, open loops, next action) when a session ends or context approaches capacity. `risk: safe`, MIT, from [alapha888/session-handoff-kit](https://github.com/alapha888/session-handoff-kit).
+- **lognorm (#1774, landed in #1810)** - work a site's SEO and AI-visibility (GEO) backlog through the hosted LogNorm MCP server: audits, fixes, content and AI-answer tracking. `risk: safe`, MIT, official source [lognorm/lognorm-mcp](https://github.com/lognorm/lognorm-mcp).
+- **shark** and **court (#1777, landed in #1812)** - two structured-decision skills: a Shark Tank-style panel of Claude sub-agent investors that each go IN or OUT, and a courtroom where a prosecutor and defense argue and a jury votes. `risk: safe`, MIT, from [alexyc9381/shark-skill](https://github.com/alexyc9381/shark-skill) and [alexyc9381/court-skill](https://github.com/alexyc9381/court-skill).
+
+### Changed
+
+- **yaml 2.9.1 (#1808)** - bump the published installer's bundled `yaml` runtime dependency to 2.9.1 and align the package-contents regression.
+
+### Fixed
+
+- **express 4.22.3 (#1799, #1803, #1804)** - bump the bundled Express boilerplate in `loki-mode`, `telegram` and `whatsapp-cloud-api` to the current patch line.
+- **parallel-search-mcp (#1802)** - document the optional `User-Agent` header so Parallel can attribute traffic set up by this skill; it does not identify users or count installs.
+
+### Documentation and community
+
+- Credits for the new external skill sources are recorded in the README.
+- Thanks to @georgeatparallel, @Gautam8387, @MBK-fr, @alapha888, @dskuldeep, @alexyc9381 and the LogNorm/ASC-IT teams for the contributions in this batch.
+
+## [18.15.0] - 2026-10-05 - "Agent Publishing, Coverage Gaps, and Social Writing"
+
+> Adds **12** reviewed skills for agent-page publishing, coverage-driven test writing, macro/FX data, quantitative research, and Twitter/X and LinkedIn writing. Ships **2,652** skills.
+
+A catalog release for Claude Code, Cursor, Codex CLI, Gemini CLI, and related AI coding assistants. It includes the complete protected maintainer batch merged after `18.14.0`, with existing installation interfaces preserved.
+
+### Start here
+
+- Install: `npx agentic-awesome-skills@18.15.0`
+- [Choose your tool](README.md#choose-your-tool)
+- [Best skills by tool](README.md#best-skills-by-tool)
+- [Bundles](docs/users/bundles.md)
+- [Workflows](docs/users/workflows.md)
+
+### Added
+
+- **byagent (#1788)** - publish agent-written Markdown or HTML as a shareable link with the `byagent` CLI, read readers' line comments back, edit, republish to the same link and resolve them. `risk: critical`, MIT, from [anup-a/agent-artifacts](https://github.com/anup-a/agent-artifacts).
+- **supercov (#1787)** - measure line, branch and MC/DC coverage of a project's existing tests with the `supercov` CLI, then write small, focused tests for the code no test reaches. `risk: critical`, MIT, from [supercorp-ai/supercov](https://github.com/supercorp-ai/supercov).
+- **fxmacrodata (#1786)** - query FXMacroData for official-source macro indicators, release calendars, central-bank policy rates, FX rates and CFTC positioning across 22 currencies. `risk: safe`, official-source REST data.
+- **axonx (#1784)** - develop AxonX research plugins and operate quantitative research tasks through CLI or MCP, inspecting execution status, logs, artifacts and lineage. `risk: critical`, Apache-2.0, from [FlowLLM-AI/AxonX](https://github.com/FlowLLM-AI/AxonX).
+- **write-in-my-voice**, **turn-this-into-a-thread**, **same-idea-both-platforms**, **repurpose-into-a-post**, **define-my-content-pillars**, **why-did-this-post-flop**, **get-seen-in-replies**, **draft-my-comments (#1783)** - eight Twitter/X and LinkedIn writing skills: draft in your own voice, write threads, cross-post, repurpose long content, pick content pillars, diagnose a post that underperformed, and write replies and comments worth reading. An optional paid VoiceMoat connector adds voice scoring and preview-gated publishing. MIT, from [prateeks367/voicemoat-skills](https://github.com/prateeks367/voicemoat-skills).
+
+### Fixed
+
+- **jobs-to-be-done-analyst**, **onboarding-psychologist (#1785)** - replace the placeholder descriptions with real trigger guidance, within the description length limit.
+
+### Documentation and community
+
+- Credits for the new external skill sources are recorded in the README.
+- Thanks to the contributors to #1783, #1784, #1785, #1786, #1787, and #1788.
+
+### Validation scope
+
+Exact-head maintainer review for changed skill content, protected source PRs, repository validation and tests, reference validation, docs security, protected CI and CodeQL, dependency review, canonical synchronization, release preflight, npm publication, and release provenance verification.
+
+## [18.14.0] - 2026-10-04 - "Container Deploys, Browser-Extension Launch, and a Cleaner Web Build"
+
+> Adds **2** reviewed skills for container deployment and end-to-end browser-extension delivery, and replaces a vulnerable web-app build dependency. Ships **2,640** skills.
+
+A catalog release for Claude Code, Cursor, Codex CLI, Gemini CLI, and related AI coding assistants. It includes the complete protected maintainer batch merged after `18.13.0`, with existing installation interfaces preserved.
+
+### Start here
+
+- Install: `npx agentic-awesome-skills@18.14.0`
+- [Choose your tool](README.md#choose-your-tool)
+- [Best skills by tool](README.md#best-skills-by-tool)
+- [Bundles](docs/users/bundles.md)
+- [Workflows](docs/users/workflows.md)
+
+### Added
+
+- **cloudish (#1776)** - deploy a Dockerfile, source folder, or existing image to Cloudish as a running container at a live URL, built server-side with no local Docker, with confirmation before spending credits. `risk: critical`, MIT, from [cloudishai/skills](https://github.com/cloudishai/skills).
+- **browser-extension-launch (#1768)** - turn a plain-language idea into a shipped Chrome Manifest V3 extension: product loop, implementation, diagnosis, real-browser acceptance, packaging, store materials, and submission recovery. `risk: critical`, MIT, from [xiehuan123/browser-extension-launch](https://github.com/xiehuan123/browser-extension-launch).
+
+### Changed
+
+- **Web-app build dependency (#1775)** - removes the vulnerable `vite-plugin-singlefile` (transitively pulling `braces`, which is unpatched) and inlines the Workbench build with a small dependency-free script plus a regression test. The web-app audit is clean again.
+
+### Documentation and community
+
+- Credits for the new external skill sources are recorded in the README.
+- Thanks to the contributors to #1768, #1775, and #1776.
+
+### Validation scope
+
+Exact-head maintainer review for changed skill content, protected source PRs, repository validation and tests, reference validation, docs security, protected CI and CodeQL, dependency review, canonical synchronization, release preflight, npm publication, and release provenance verification.
+
+## [18.13.0] - 2026-10-03 - "Etsy Market Intelligence and Real Phone-Call Automation"
+
+> Adds **3** reviewed skills for Etsy marketplace intelligence and real outbound phone-call automation - live Apify Actor search rows, shop sales-velocity panels, and the official PlaceCall voice API workflow. Ships **2,638** skills.
+
+A catalog release for Claude Code, Cursor, Codex CLI, Gemini CLI, and related AI coding assistants. It includes the complete protected maintainer batch merged after `18.12.0`, with existing installation interfaces preserved.
+
+### Start here
+
+- Install: `npx agentic-awesome-skills@18.13.0`
+- [Choose your tool](README.md#choose-your-tool)
+- [Best skills by tool](README.md#best-skills-by-tool)
+- [Bundles](docs/users/bundles.md)
+- [Workflows](docs/users/workflows.md)
+
+### Added
+
+- **etsy-search-listings (#1767)** - fetch live Etsy search listing rows for a keyword, market phrase, or category through the Apify Actor `publicrecords/etsy-search-scraper`, with rank, price, badge, and shop fields for marketplace research. `risk: critical`, paid API, requires an Apify token.
+- **etsy-shop-sales-history (#1767)** - read Etsy shop sales counters, deltas, and breakout flags from the Apify Actor `publicrecords/etsy-shop-velocity` panel snapshot for growth comparisons across a shop watch list. `risk: critical`, paid API, requires an Apify token.
+- **placecall (#1765)** - drive the official PlaceCall API to place real outbound calls to US businesses, follow the live event stream, answer mid-call questions, and read the structured outcome and transcript. `risk: critical`, MIT, from [voygr-tech/placecall](https://github.com/voygr-tech/placecall).
+
+### Documentation and community
+
+- Credits for the new external PlaceCall source are recorded in the README under **Official Sources**.
+- Thanks to the contributors to #1765 and #1767.
+
+### Validation scope
+
+Exact-head maintainer review for changed skill content, protected source PRs, repository validation and tests, reference validation, docs security, protected CI and CodeQL, dependency review, canonical synchronization, release preflight, npm publication, and release provenance verification.
+
+## [18.12.0] - 2026-10-02 - "Cline Orchestration, Web3 Engineering, and Safer Release Pipelines"
+
+> Adds **13** reviewed skills for Cline CLI orchestration, Web3 and DeFi engineering, AI agent operations, and secure publishing - tightens reviewed fork bundle handling and removes an obsolete Syria block from a WAF example. Ships **2,632** skills.
+
+A catalog release for Claude Code, Cursor, Codex CLI, Gemini CLI, and related AI coding assistants. It includes the complete protected maintainer batch merged after `18.11.0`, with existing installation interfaces preserved.
+
+### Start here
+
+- Install: `npx agentic-awesome-skills@18.12.0`
+- [Choose your tool](README.md#choose-your-tool)
+- [Best skills by tool](README.md#best-skills-by-tool)
+- [Bundles](docs/users/bundles.md)
+- [Workflows](docs/users/workflows.md)
+
+### Added
+
+- **cline-pilot (#1756)** - orchestrates focused Cline CLI coding tasks, monitors long runs against repository and test evidence, relays decision points in a fixed format, and checks results against explicit acceptance criteria. `risk: critical`, MIT, from [gongdear/cline-pilot](https://github.com/gongdear/cline-pilot).
+- **Web3 and AI agent engineering batches (#1752, #1753)** - add 20 skills across decentralized application engineering, DeFi, blockchain operations, and AI agent development. The skills provide task-specific implementation and operational guidance with declared risk and safety limits.
+- **dropthehassle-publish (#1754)** - adds the official DropTheHassle publishing skill for its documented publishing workflow.
+
+### Changed
+
+- **Reviewed fork bundle paths (#1760)** - permit only exact, protected-ledger support paths for previously reviewed fork skill bundles, including root README and `.gitignore`; all other path, content, and exact-head review gates remain in force.
+- **waf-setup (#1755)** - removes Syria from the example geo-block rule after the cited sanctions program ended, avoiding an obsolete production block example.
+
+### Documentation and community
+
+- Credits for new external skill sources are recorded in the README and source PRs.
+- Thanks to the contributors to #1752, #1753, #1754, #1755, #1756, and #1760.
+
+### Validation scope
+
+Exact-head maintainer review for changed skill content, protected source PRs, repository validation and tests, reference validation, docs security, protected CI and CodeQL, dependency review, canonical synchronization, release preflight, npm publication, and release provenance verification.
+
+## [18.11.0] - 2026-10-01 - "Repository Engineering, Blueprint Planning, and a Cleaner Contributor Pipeline"
+
+> Adds **8** reviewed skills - repository-native engineering, evidence-backed blueprint planning, and a five-skill English productivity pack - refreshes the spectral-field skill and the hosted catalog, and closes every open dependency advisory. Ships **2,610** skills.
+
+A catalog release for Claude Code, Cursor, Codex CLI, Gemini CLI, and related AI coding assistants. It includes the complete protected maintainer batch merged after `18.10.0`, with existing installation interfaces preserved.
+
+### Start here
+
+- Install: `npx agentic-awesome-skills@18.11.0`
+- [Choose your tool](README.md#choose-your-tool)
+- [Best skills by tool](README.md#best-skills-by-tool)
+- [Bundles](docs/users/bundles.md)
+- [Workflows](docs/users/workflows.md)
+
+### Added
+
+- **Repository engineering pair (#1727)** - `repo-foundation` implements features, fixes, and authorized contract migrations inside a repository's existing conventions, preserving user edits and establishing failure invariants before persisted-state changes. `repo-native-refactor` reviews a diff without editing, or performs evidence-based cleanup bounded by risk band R0-R4. Both are `risk: critical` and carry explicit stop conditions for unresolved ownership or contract consequences. MIT, adapted from [Natchannnn/repository-engineering-skills](https://github.com/Natchannnn/repository-engineering-skills).
+- **idea-to-blueprint (#1742)** - turns a raw product idea into one evidence-backed Markdown build blueprint: intake questions, a tiered research protocol, ranked architecture drivers, a version-pinned stack, personas and flows, epics with Given/When/Then acceptance criteria, and a session protocol that lets a coding agent build one epic per fresh session. Ships a stdlib-only `lint_blueprint.py` that validates the finished document without executing it. `risk: safe`, MIT, authored by [@iniesohidham](https://github.com/iniesohidham).
+- **English productivity pack (#1741)** - five focused English skills from [alapha888/agent-skills-en](https://github.com/alapha888/agent-skills-en) (MIT): `deep-research-framework` tiers sources and cross-verifies before writing conclusion-first reports with explicit uncertainty; `five-axis-code-review` walks correctness, security, readability, performance, and test coverage and returns actionable comments instead of style nitpicks; `git-commit-message` writes conventional commits from the staged diff; `meeting-notes` turns raw notes into decisions, owned action items, and open questions; `tech-writing-proofread` returns an Original -> Suggestion -> Reason checklist without rewriting the document. All `risk: safe`.
+
+### Changed
+
+- **liuguang-banlan-ui spectral field (#1743)** - refreshes the two parameterized UI modes with a calibrated palette contract, an sRGB-encoded shader with output-code dithering, a CSS fallback that stays hue-ordered instead of using fixed radial spots, continuous field time across pause/resume, and a repaint on resize. Adds a data-only manifest parser and validator, a deterministic measurement helper reporting OKLab deviation, lightness shift, and gray ratio, a caching-disabled preview server, and focused Python tests. `risk: critical`.
+- **Hosted catalog analytics (#1744)** - installs `@vercel/analytics` and mounts `<Analytics />` inside the router so page views are tracked across the catalog routes.
+- **youtube-summarizer output template (#1722)** - switches the remaining Portuguese labels in the summary template to English, matching the rest of the template.
+- **React 19.3.0 (#1738, #1746)** - aligns `react` and `react-dom` at 19.3.0 in the catalog web app and in the `loki-mode` example frontend, so both packages always share the same version.
+- **Top Contributor rankings (#1724)** - adds `npm run sync:top-contributors` and its regression test, so the README ranking is recomputed from git history instead of being hand-maintained.
+- **Maintainer SkillSpector guidance (#1732)** - calibrates how SkillSpector advisory findings are triaged in the canonical maintainer skill.
+
+### Fixed
+
+- **typescript-expert diagnostic script (#1730)** - removes `shell=True` from `ts_diagnostic.py`, so TypeScript project paths are passed as arguments rather than interpolated into a shell command.
+
+### Documentation and community
+
+- Added the `Natchannnn/repository-engineering-skills`, `iniesohidham/idea-to-blueprint`, and `alapha888/agent-skills-en` source credits to the README.
+- Thanks to [@iniesohidham](https://github.com/iniesohidham) for `idea-to-blueprint`, [@Natchannnn](https://github.com/Natchannnn) for the repository-engineering pair, [@alapha888](https://github.com/alapha888) for the English productivity pack, [@3516027002att-ui](https://github.com/3516027002att-ui) for the `liuguang-banlan-ui` spectral-field refresh, and [@ManiShah7](https://github.com/ManiShah7) for the `youtube-summarizer` template cleanup.
+- Closed every open dependency-upgrade proposal as either merged or superseded, and the repository now reports zero open Dependabot alerts.
+
+### Validation scope
+
+Exact-head maintainer review for changed skill content, protected source PRs, repository validation and tests, reference validation, docs security, protected CI and CodeQL, dependency review, canonical synchronization, release preflight, npm publication, and release provenance verification.
+
+## [18.10.0] - 2026-09-30 - "SME Operations, 15 Official Beatra Skills, and Four New Advisories Closed"
+
+> Adds **124** reviewed skills - a complete SME operations catalog and fifteen official Beatra media skills - hardens the protected maintainer gates, closes ten Dependabot advisories, and ships **2,602** skills.
+
+A catalog release for Claude Code, Cursor, Codex CLI, Gemini CLI, and related AI coding assistants. It includes the complete protected maintainer batch merged after `18.9.0`, with existing installation interfaces preserved.
+
+### Start here
+
+- Install: `npx agentic-awesome-skills@18.10.0`
+- [Choose your tool](README.md#choose-your-tool)
+- [Best skills by tool](README.md#best-skills-by-tool)
+- [Bundles](docs/users/bundles.md)
+- [Workflows](docs/users/workflows.md)
+
+### Added
+
+- **SME operations catalog (#1688, #1689, #1690-#1698)** — **106** small-business operations skills covering people, finance, compliance, projects, knowledge, and reporting: onboarding and offboarding, payroll and expense accounting, credit-cycle analysis, contracts and policy libraries, capacity and workload planning, KPI and OKR tracking, recruitment and career development, and month-end close. Each is a self-contained Markdown workflow with explicit limitations and no bundled executables; the batch keeps every entry inside the repository's 500-line budget with detail in `references/`.
+- **Fifteen official Beatra media skills (#1473-#1487)** — `beatra`, `talking-avatar-video`, `suno-lyrics-to-song`, `ai-logo-maker`, `music-generation-studio`, `product-photo-studio`, `poster-design-studio`, `ecommerce-listing-image-set`, `ai-image-generation-studio`, `ai-podcast-voiceover`, `voiceover-narration-studio`, `ai-multilingual-dubbing`, `voice-cloning-studio`, `ai-photo-restyler`, and `viral-video-teardown-remake`. Each entry is a reviewed pointer, not the executable package: it pins the archive URL and SHA-256, requires digest verification and a manual inspection before activation, and disables the client's silent self-update before any other command. `risk: critical`, paid hosted work.
+- **mirrord (#1706)** — `mirrord` runs a local process inside a live Kubernetes pod's network, environment, and traffic so a change can be verified against real services without deploying. Asks before traffic-stealing or cluster-modifying steps. `risk: safe`.
+- **Busabase workspace (#1682)** — `busabase` covers authorized workspace record and knowledge operations, permission-aware ChangeRequests, and canonical-versus-pending readback through the hosted MCP server. `risk: critical`.
+- **Changelog entry (#1699)** — `changelog-entry` turns a commit range or pull request into a Keep a Changelog block, grouping conventional-commit types into Added, Changed, Deprecated, Removed, Fixed, and Security. `risk: safe`.
+
+### Changed
+
+- **SkillSpector advisory scans (#1703)** — add a PR-only, non-blocking SkillSpector workflow that waits for the exact-head `pr-evidence` result, then scans full changed skill directories from immutable Git refs with a pinned NVIDIA SkillSpector v2.12.0, a frozen dependency lock, no scanner credentials, and a Linux network namespace. Reports bind the base and head SHA and remain advisory; they satisfy no required check and change no merge authority.
+- **Dependency advisories (#1712)** — close ten open Dependabot alerts by resolving `brace-expansion` 1.1.21 and 5.0.12, `fast-uri` 3.1.8, and `ip-address` 10.7.2 in the root, catalog web app, and the `telegram` and `whatsapp-cloud-api` example lockfiles, using the override pattern already present in those manifests. The mirrored plugin copies are regenerated by the protected canonical-sync lane. `npm audit` reports zero vulnerabilities in all four manifests.
+- **Vercel production headers (#1685)** — tighten the hosted catalog's production response headers and document the intended policy.
+- **Contributor rendering (#1683)** — keep enough contrib.rocks headroom that the README shows every contributor instead of truncating the list.
+- **Maintainer documentation (#1707)** — align the canonical maintainer skill with the current CI workflow and the SkillSpector report interpretation.
+
+### Fixed
+
+- **Fork copy classification (#1709)** — a new `SKILL.md` that Git paired as a copy of an existing file was accepted or rejected depending on whether the similarity heuristic chose a canonical skill or a generated plugin mirror as the copy origin. The fork classifier now treats a copy origin as read-only, matching the documented source-only rule, while the destination still carries every path, mode, object, and size check and editing, renaming, or deleting that origin still fails closed.
+- **Fork run allowlist (#1714)** — the PR-only SkillSpector workflow was missing from the fork-run approval allowlist, so every fork pull request stalled on `action_required` with no required check able to run. The read-only, secretless, SHA-pinned workflow is now approvable, and a regression test binds the allowlist entry to that contract.
+
+### Documentation and community
+
+- Added the `busabase/skills` and `metalbear-co/skills` source credits plus fifteen official Beatra source credits to the README.
+- Thanks to [@WHOISABHISHEKADHIKARI](https://github.com/WHOISABHISHEKADHIKARI) for the eleven SME operations batches and for repairing the dangling catalog links and oversized entries, [@beatra-ai](https://github.com/beatra-ai) for the fifteen official Beatra media skills, [@ranglang](https://github.com/ranglang) for `busabase`, [@hank-metalbear](https://github.com/hank-metalbear) for `mirrord`, and [@Prajeeth-12](https://github.com/Prajeeth-12) for `changelog-entry`.
+
+### Validation scope
+
+Exact-head maintainer review for changed skill content, protected source PRs, repository validation and tests, reference validation, docs security, protected CI and CodeQL, dependency review, canonical synchronization, release preflight, npm publication, and release provenance verification.
+
+## [18.9.0] - 2026-09-29 - "Vercel Hosting, Guided Skill Intake, and Two New Reviewed Skills"
+
+> Adds 2 reviewed skills for dependency-API drift knowledge and LinkedIn prospecting through an MCP server, adds optional guided skill intake to AAS Core, prepares the catalog for sponsored Vercel hosting on the canonical `aaskills.tech` domain, and ships **2,478** skills.
+
+A catalog release for Claude Code, Cursor, Codex CLI, Gemini CLI, and related AI coding assistants. It includes the complete protected maintainer batch merged after `18.8.0`, with existing installation interfaces preserved.
+
+### Start here
+
+- Install: `npx agentic-awesome-skills@18.9.0`
+- [Choose your tool](README.md#choose-your-tool)
+- [Best skills by tool](README.md#best-skills-by-tool)
+- [Bundles](docs/users/bundles.md)
+- [Workflows](docs/users/workflows.md)
+
+### Added
+
+- **since-cutoff (#1663)** — `since-cutoff` lists which APIs of a project's pinned Python dependencies changed after the model's training cutoff, shows where the code uses them, and can write short `AGENTS.md` or `CLAUDE.md` notes. The comparison is a static `griffe` diff pinned to `uvx since-cutoff@0.4.1`; `scan` makes no model calls, writes only to its own git-ignored folder, and asks before the first download. `risk: safe`.
+- **Omentir LinkedIn outreach (#1662)** — `omentir-linkedin-outreach` runs LinkedIn prospecting and outreach through the hosted Omentir MCP server: find people, score fit from evidence, draft messages, and check campaigns. Research and drafts only by default, never sends unless asked in the session, never signs into LinkedIn, and never asks for the user's LinkedIn credentials. `risk: critical`.
+- **Guided skill intake (#1664)** — AAS Core's MCP `initialize` contract now offers an optional guided intake for users who want help explaining their goal before skill selection. It stays advisory: the agent still owns project analysis and the exact skill choice.
+
+### Changed
+
+- **Vercel OSS hosting (#1667, #1669)** — prepare the catalog for hosting on the sponsored Vercel team while retaining `https://aaskills.tech/` as the canonical public URL. Adds `vercel.json`, a `.vercelignore`, build-time docs metadata that does not depend on Git, and the Vercel OSS Program badge in the README support section.
+- **Live SEO checks (#1677, #1678)** — align the live SEO contract with the title, description, and structured metadata the catalog actually renders, drop the stale FAQPage and homepage wording requirements, and shorten the homepage meta description flagged by Bing Webmaster Tools.
+- **TraderSpy source credit (#1661)** — restore the `target1m/traderspy-mcp` entry under Official Sources that #1610 added and #1621 accidentally overwrote, so the six `traderspy-*` skills are credited again.
+- **Installer path resolution (#1673)** — fix a bug where a relative `--path` was resolved against the working directory twice, so the README's documented OpenCode command installed to a doubled directory, never created `.agents/skills`, and still exited 0. Absolute and `~`-prefixed paths were already correct and are unchanged.
+- **Dependency advisories (#1675)** — override `ip-address` in the `loki-mode` example backend, clearing two moderate advisories that reached the project through `express-rate-limit`.
+- **Dependency refreshes (#1665, #1666)** — update `@supabase/supabase-js` to 2.116.0 and `react-virtuoso` to 4.18.13 in the catalog web app.
+
+### Documentation and community
+
+- Added the `MohammadHijjawi97/since-cutoff` and `vanshyadav1408/Omentir` source credits to the README.
+- Thanks to [@MohammadHijjawi97](https://github.com/MohammadHijjawi97) for `since-cutoff`, [@vanshyadav1408](https://github.com/vanshyadav1408) for `omentir-linkedin-outreach`, and [@MuratKaragozgil](https://github.com/MuratKaragozgil) for restoring the TraderSpy credit.
+
+### Validation scope
+
+Exact-head maintainer review for changed skill content, protected source PRs, repository validation and tests, reference validation, docs security, protected CI and CodeQL, dependency review, canonical synchronization, release preflight, npm publication, and release provenance verification.
+
+## [18.8.0] - 2026-09-28 - "Serply Search, NSFW AI SpicyAPI, and the Jev Social v0.1.10 Pin"
+
+> Adds 2 reviewed skills for Google/News/Scholar search via MCP and for adult media generation with spend gates and consent rules, refreshes the Jev Social runtime pin, and improves the README contributor layout for **2,476** skills.
+
+A catalog release for Claude Code, Cursor, Codex CLI, Gemini CLI, and related AI coding assistants. It includes the complete protected maintainer batch merged after `18.7.0`, with existing installation interfaces preserved.
+
+### Start here
+
+- Install: `npx agentic-awesome-skills@18.8.0`
+- [Choose your tool](README.md#choose-your-tool)
+- [Best skills by tool](README.md#best-skills-by-tool)
+- [Bundles](docs/users/bundles.md)
+- [Workflows](docs/users/workflows.md)
+
+### Added
+
+- **Serply Search MCP (#1655)** — `serply-search-mcp` covers Google, Google News, Google Scholar, Bing, and public page reading through the Serply MCP server. Provider-chosen, no default changes, credential handling via the host's secret mechanism, and untrusted-content guidance included.
+- **NSFW AI SpicyAPI (#1649)** — `nsfw-ai-spicyapi` generates adult images, image-to-video clips and edits through the SpicyAPI API with hard refusal rules, quote-before-spend gates, and explicit consent boundaries. `risk: critical`.
+
+### Changed
+
+- **Jev Social (#1656)** — refresh the pinned runtime from `v0.1.8` (`5270e23cfd27aace9055669ee396926973baa241`) to `v0.1.10` (`baf3cd6aa4f9c881665c29ed29a10391f761760b`), with explicit decision-provider boundaries, telemetry default off for spawned `socai` children, and the automatic installer still excluded.
+- **README (#1653)** — improve the Top Contributors section layout with side-by-side ranking tables and a repaired anchor.
+
+### Documentation and community
+
+Thanks to [@googio](https://github.com/googio) for `serply-search-mcp`, [@spicyapi-owner](https://github.com/spicyapi-owner) for `nsfw-ai-spicyapi`, [@IRONICBo](https://github.com/IRONICBo) for the Jev Social runtime refresh, and [@WHOISABHISHEKADHIKARI](https://github.com/WHOISABHISHEKADHIKARI) for the contributor layout repair.
+
+### Validation scope
+
+Exact-head maintainer review for changed skill content, protected source PRs, repository validation and tests, reference validation, docs security, protected CI and CodeQL, dependency review, canonical synchronization, release preflight, npm publication, and release provenance verification.
+
+## [18.7.0] - 2026-09-27 - "Prompt Provenance, LintLang Audits, and a Fully Categorized Catalog"
+
+> Adds 2 reviewed skills for verifying what a shipped AI product was actually told and for static auditing of agent instructions, refreshes the Jev Social and Unified AI Gateway runtime references, and classifies every remaining catalog entry for **2,474** skills with zero `uncategorized` records.
+
+A catalog release for Claude Code, Cursor, Codex CLI, Gemini CLI, and related AI coding assistants. It includes the complete protected maintainer batch merged after `18.6.0`, with existing installation interfaces preserved.
+
+### Start here
+
+- Install: `npx agentic-awesome-skills@18.7.0`
+- [Choose your tool](README.md#choose-your-tool)
+- [Bundles](docs/users/bundles.md)
+- [Workflows](docs/users/workflows.md)
+
+### Added
+
+- **System Prompt Lookup (#1628)** — `system-prompt-lookup` answers "what is this product actually told?" from a dated archive of captured prompts and tool schemas instead of a fluent recollection. Requires quoting only what was fetched in the session, labels captured versus vendor-reported artifacts, and treats fetched prompts as data rather than instructions.
+- **LintLang Audit (#1638)** — `lintlang-audit` runs the pinned LintLang 0.8.0 static checks over a named agent instruction file, tool definition, or supported Python prompt, and reports per-file verdicts, severity counts, finding codes, and locations without editing files or calling a model. Read-only, `risk: safe`, with the Apache-2.0 notice linked at its pinned upstream revision.
+
+### Changed
+
+- **Jev Social (#1637)** — refresh the pinned runtime from `v0.1.5` to `v0.1.8` (`5270e23cfd27aace9055669ee396926973baa241`); the read-only browser boundary and explicit-media intent are unchanged.
+- **Unified AI Gateway (#1627)** — revendor the skill so the current `v0.8.0` release and its fifteen tool names are distinguished from the digest-pinned, content-reviewed `0.4.9` image that ships nine. The pin and digests are unchanged, and the content-review links stay on the immutable `8561ec5` revision.
+- **Catalog categorization (#1641)** — add a reviewed, source-controlled override map that classifies the 359 remaining `uncategorized` entries, so the catalog now reports **0** `uncategorized` skills.
+- **Release reproducibility (#1642)** — derive guide sitemap dates from the last substantive change rather than the canonical-sync commit or the wall clock, so canonical-sync PRs are byte-for-byte reproducible.
+- **Hosted catalog and documentation (#1629, #1631, #1632, #1633, #1635, #1636)** — publish the user guides in the catalog site with full-text search, Git-derived dates, article and breadcrumb structured data, and real sitemap dates; restore the homepage catalog provider; and unify the site theme and typography across routes.
+- **Release surfaces** — regenerate the catalog, offline AAS Core assets, Codex/Claude plugin mirrors, editorial bundles, marketplace manifests, compatibility reports, and web assets for 2,474 skills.
+
+### Documentation and community
+
+- Added the `hermes-labs-ai/lintlang` and `Continuum-AI-Corp/OrcaPromptVault` source credits to the README.
+- Thanks to [@xizhuomengcontin](https://github.com/xizhuomengcontin) for `system-prompt-lookup`, [@roli-lpci](https://github.com/roli-lpci) and Hermes Labs for `lintlang-audit`, [@FrancoStino](https://github.com/FrancoStino) for the Unified AI Gateway revendor, and [@IRONICBo](https://github.com/IRONICBo) for the Jev Social runtime refresh.
+
+### Validation scope
+
+Exact-head maintainer review for changed skill content, protected source PRs, repository validation and tests, reference validation, docs security, protected CI and CodeQL, dependency review, canonical synchronization, release preflight, Linux/Windows preview checks, npm publication, and release provenance verification.
+
+## [18.6.0] - 2026-09-26 - "Radar & Crypto Intelligence, Electron E2E, and Claude API Refresh"
+
+> Adds 13 reviewed skills across weather radar, crypto research, MCP supply-chain safety, and Electron end-to-end testing; refreshes Claude API model guidance; and ships the hosted catalog and plugin surfaces at **2,472** skills.
+
+A catalog release for Claude Code, Cursor, Codex CLI, Gemini CLI, and related AI coding assistants. It includes the complete protected maintainer batch merged after `18.5.0`, with existing installation interfaces preserved.
+
+### Start here
+
+- Install: `npx agentic-awesome-skills@18.6.0`
+- [Choose your tool](README.md#choose-your-tool)
+- [Best skills by tool](README.md#best-skills-by-tool)
+- [Bundles](docs/users/bundles.md)
+- [Workflows](docs/users/workflows.md)
+
+### Added
+
+- **NEXRAD and radar analysis (#1602)** — `nexrad-mosaic-access`, `nexrad-mosaic-construction`, `nexrad-product-access`, `nexrad-radar-visualization`, and `radar-satellite-analysis` for validated NOAA/NCEP retrieval, quality-aware mosaics, geometry-correct visualization, and uncertainty-aware interpretation.
+- **TraderSpy crypto research (#1610)** — `traderspy-market-briefing`, `traderspy-market-screener`, `traderspy-position-check`, `traderspy-smart-money`, `traderspy-technical-analysis`, and `traderspy-trading-signals` for read-only market, derivatives, position, whale, technical, and signal analysis.
+- **MCP dependency drift audit (#1607)** — statically detect mutable npm/npx references in MCP configurations before review or CI, without executing discovered servers.
+- **Electron Drive (#1593, maintainer repair #1621)** — drive an Electron app on a scratch profile with Playwright for snapshots, screenshots, interaction, logs, renderer evaluation, and main-process checks.
+
+### Changed
+
+- **Claude API (#1614, merged as #1618)** — update Claude model defaults and current API guidance across the canonical skill and its language references.
+- **Unified AI Gateway (#1616)** — align the skill with the published server's fifteen governed MCP tools and preserve its provider-free, read-only safety boundaries.
+- **Maintainer tooling (#1613)** — improve Jev maintainer triage evidence and keep it advisory rather than a merge gate.
+- **Hosted catalog and web experience (#1606, #1608, #1609)** — add the public AAS info API, improve GitHub video playback fallback, and ship the AAS introduction video assets and landing updates.
+- **Release surfaces** — regenerate the catalog, offline AAS Core assets, Codex/Claude plugin mirrors, editorial bundles, marketplace manifests, compatibility reports, and web assets for 2,472 skills.
+
+### Documentation and community
+
+- Added the WordCamp Kathmandu 2026 "Prompt Smarter, Not Harder" showcase (#1605).
+- Preserved contributor credit for the TraderSpy, NEXRAD, MCP drift-audit, and Electron Drive contributions.
+
+### Validation scope
+
+Exact-head maintainer review for changed skill content, protected source and maintainer repair PRs, repository validation and tests, reference validation, docs security, protected CI and CodeQL, dependency review, canonical synchronization, release preflight, Linux/Windows preview checks, npm publication, and release provenance verification.
+
+## [18.5.0] - 2026-09-25 - "Film Crews, TestDriver E2E, and Safer Catalog Filters"
+
+> Adds a film-crew video-planning skill and a TestDriver end-to-end testing skill, and makes the hosted catalog fall back safely on unsupported URL filters.
+
+A catalog release for Claude Code, Cursor, Codex CLI, Gemini CLI, and related AI coding assistants. It expands the catalog to **2,459** skills and preserves existing installation interfaces.
+
+### Start here
+
+- Install: `npx agentic-awesome-skills@18.5.0`
+- [Choose your tool](README.md#choose-your-tool)
+- [Best skills by tool](README.md#best-skills-by-tool)
+- [Bundles](docs/users/bundles.md)
+- [Workflows](docs/users/workflows.md)
+
+### Added
+
+- **film-crew (#1595)** — turn a one-line AI video idea into a shot list with one model-ready prompt per shot by running it past seven film-crew roles, plus prompt fixes and reroll diagnosis for Wan, LTX, Kling, Veo, Seedance, Hailuo, and Runway.
+- **testdriver-e2e-testing (#1592)** — author, run, and debug end-to-end tests that drive browsers and native apps in a real desktop sandbox with AI vision and natural-language element descriptions.
+
+### Changed
+
+- **Hosted catalog URL filters (#1590)** — unsupported `category`, `risk`, `source`, `scope`, and `sort` query values now fall back to their defaults instead of hiding the catalog.
+
+### Validation scope
+
+Exact-head maintainer review for changed skill content, protected source PRs, repository validation and tests, docs security, protected CI and CodeQL, canonical synchronization, exact-release Pages deployment from the immutable `v18.5.0` tag, and live current/legacy route verification.
+
+---
+
+## [18.4.0] - 2026-09-24 - "Weather Workflows, Agent Memory, and aaskills.tech"
+
+> Adds five weather-data pipeline skills and an agent memory-discipline skill, refreshes the Jev Social runtime pin, and serves the hosted catalog from `aaskills.tech`.
+
+A catalog release for Claude Code, Cursor, Codex CLI, Gemini CLI, and related AI coding assistants. It expands the catalog to **2,457** skills and preserves existing installation interfaces.
+
+### Start here
+
+- Install: `npx agentic-awesome-skills@18.4.0`
+- [Choose your tool](README.md#choose-your-tool)
+- [Best skills by tool](README.md#best-skills-by-tool)
+- [Bundles](docs/users/bundles.md)
+- [Workflows](docs/users/workflows.md)
+
+### Added
+
+- **noaa-radar-satellite-fetching (#1585)** — retrieve NEXRAD and GOES products from public cloud archives with verified site, product, channel, sector, and scan-time selection.
+- **weather-model-run-discovery (#1585)** — resolve the newest complete numerical weather prediction cycle across provider mirrors without downloading full payloads.
+- **weather-pipeline-performance-diagnosis (#1585)** — measure discovery, transfer, parsing, scientific processing, and rendering separately before changing code.
+- **weather-data-reproducibility (#1585)** — record and verify provenance manifests for weather inputs and derived artifacts, including object identity, selections, software versions, and hashes.
+- **weather-data-lifecycle-management (#1585)** — define ownership, retention, and cleanup for temporary files, interactive data, caches, and exports.
+- **agent-memory-discipline (#1572)** — standing rules for when an agent recalls from long-term memory before acting and when it saves decisions, corrections, and failures afterwards, backend-neutral and CC0-1.0.
+
+### Changed
+
+- **Jev Social runtime pin (#1580)** — move every executable and license reference to the tested `v0.1.5` commit `782d809c68e2015536359aa7dceede9a3cdbb7f1`, keeping the read-only browser boundary and `risk: critical` classification.
+- **Hosted catalog domain** — serve the Pages site from `https://aaskills.tech/`, use root-relative assets, and update canonical metadata, sitemap, repository links, and legacy redirect destinations.
+- **Pages deployment** — deploy the catalog only from protected `main` or an exact immutable release tag.
+
+### Validation scope
+
+Exact-head maintainer review for changed skill content, protected source PRs, repository validation and tests, docs security, protected CI and CodeQL, canonical synchronization, exact-release Pages deployment from the immutable `v18.4.0` tag, and live current/legacy route verification.
+
+---
+
+## [18.3.0] - 2026-09-23 - "Six New Skills and Safer Telegram Ads"
+
+> Adds six community skills for export analysis, DALI, resistor sizing, electronic shelf labels, Marlin, and OneRoster, and tightens Telegram Mini App advertising guidance.
+
+A catalog release for Claude Code, Cursor, Codex CLI and Gemini CLI.
+It merges #1558–#1564 and the associated maintainer batch while expanding the **2,451**-skill catalog on Core. Existing installation interfaces remain supported.
+
+### Start here
+
+- Install: `npx agentic-awesome-skills@18.3.0`
+- [Choose your tool](README.md#choose-your-tool)
+- [Best skills by tool](README.md#best-skills-by-tool)
+- [Bundles](docs/users/bundles.md)
+- [Workflows](docs/users/workflows.md)
+
+### Added
+
+- **chatexport-need-miner (#1558)** — analyze a ChatGPT export locally to find recurring needs and organize evidence.
+- **dali-short-address-commissioner (#1559)** — guide DALI short-address commissioning.
+- **eol-resistor-calculator (#1560)** — calculate and check end-of-line resistor configurations.
+- **esl-price-sync (#1561)** — plan and troubleshoot electronic shelf-label price synchronization.
+- **marlin-bed-leveling (#1562)** — guide Marlin bed-leveling setup and troubleshooting.
+- **oneroster-csv-validator (#1563)** — validate and diagnose OneRoster CSV exports.
+
+### Changed
+
+- **Telegram Mini App monetization (#1564)** — add native and rewarded ad guidance with user choice, privacy boundaries, and server-side validation requirements.
+
+### Validation scope
+
+Exact-head maintainer review for changed skill content, protected source PRs, repository validation and tests, docs security, protected CI and CodeQL, canonical synchronization, and release-only Pages deployment from the immutable `v18.3.0` tag.
+
+---
+
+## [18.2.0] - 2026-09-22 - "Catalog Skills and Hosted Save Sync"
+
+> Ships one new community skill, refreshes Jev Social, fixes hosted catalog save
+> sync across views, and repairs `ui-ux-pro-max` on Python 3.11.
+
+A catalog patch for Claude Code, Cursor, Codex CLI and Gemini CLI.
+It merges #1551, #1549, #1545, and maintainer lane #1553 while keeping the
+**2,445**-skill catalog on Core. Existing installation interfaces remain supported.
+
+### Start here
+
+- Install: `npx agentic-awesome-skills@18.2.0`
+- [Choose your tool](README.md#choose-your-tool)
+- [Best skills by tool](README.md#best-skills-by-tool)
+- [Bundles](docs/users/bundles.md)
+- [Workflows](docs/users/workflows.md)
+
+### Added
+
+- **marketing-mindset (#1545)** — marketer decision framework for early-stage B2B/SaaS work (Axel Freeman, MIT).
+
+### Changed
+
+- **Jev Social (#1549)** — refresh skill guidance to upstream `v0.1.4` with explicit TikTok media-download boundaries.
+
+### Fixed
+
+- **Hosted catalog saves (#1551)** — sync local saved-skill state across mounted hooks and cross-tab `storage` events.
+- **ui-ux-pro-max (#1553)** — avoid Python &lt; 3.12 `SyntaxError` in `design_system.py` anti-pattern formatting (maintainer lane for fork-blocked #1550).
+
+### Validation scope
+
+Maintainer attestation on exact merge heads, protected source PRs, repository validation, documentation-security checks, protected CI, CodeQL, and release-only Pages deploy from the immutable `v18.2.0` tag.
+
+---
+
+## [18.1.0] - 2026-09-21 - "Hosted Catalog Save-State Hardening"
+
+> Hardens browser-local “saved skill” state on the hosted catalog so malformed
+> `localStorage` payloads cannot show false positives.
+
+A catalog-surface patch for Claude Code, Cursor, Codex CLI and Gemini CLI.
+It ships the hosted web fix from #1542 while keeping the **2,444**-skill catalog
+on Core. Existing installation interfaces remain supported.
+
+### Start here
+
+- Install: `npx agentic-awesome-skills@18.1.0`
+- [Choose your tool](README.md#choose-your-tool)
+- [Best skills by tool](README.md#best-skills-by-tool)
+- [Bundles](docs/users/bundles.md)
+- [Workflows](docs/users/workflows.md)
+
+### Fixed
+
+- **Hosted catalog local saves (#1542)** — accept only boolean entries when parsing
+  `saved_skills` / legacy `user_stars` records; ignore strings, numbers, and
+  array-shaped storage so corrupted browser data cannot mark skills as saved.
+
+### Validation scope
+
+Maintainer attestation on exact merge head, protected source PR #1542,
+repository validation, documentation-security checks, protected CI, CodeQL,
+and release-only Pages deploy from the immutable `v18.1.0` tag.
+
+---
+
+## [18.0.0] - 2026-09-21 - "Curated Upstream Sync and Jev Social"
+
+> Adds **41** maintainer-reviewed skills from README-credited upstream sources,
+> including `jev-social`, vendor gaps (Apify, Vercel, Expo, Remotion,
+> Hugging Face, Neon, Longbridge, Makepad), and selected community packs.
+
+A major catalog release for Claude Code, Cursor, Codex CLI and Gemini CLI.
+It merges the curated upstream batch (#1539) with per-skill maintainer review
+documented in `docs/maintainers/curated-50-upstream-review-2026-09-21.md`,
+refreshing catalog surfaces for the expanded skill registry. Existing installation
+interfaces remain supported.
+
+### Start here
+
+- Install: `npx agentic-awesome-skills@18.0.0`
+- [Choose your tool](README.md#choose-your-tool)
+- [Best skills by tool](README.md#best-skills-by-tool)
+- [Bundles](docs/users/bundles.md)
+- [Workflows](docs/users/workflows.md)
+
+### Added
+
+- **41 curated upstream skills (#1539)** — reviewed import from official and
+  community README-credited repositories; ledger in
+  `docs/maintainers/curated-50-upstream-review-2026-09-21.md`.
+- **`jev-social`** — read-only Jev/socai social research routing.
+
+### Validation scope
+
+Maintainer attestation on exact merge head, repository validation,
+documentation-security checks, protected CI, CodeQL, canonical synchronization,
+and release-only Pages deploy from the immutable `v18.0.0` tag.
+
+---
+
+## [17.8.4] - 2026-09-20 - "Core SearchAction for Pages SEO"
+
+> Aligns the Pages SEO verifier SearchAction expectation with `/core` so the
+> neon landing release can deploy to GitHub Pages.
+
+A catalog-surface hotfix for Claude Code, Cursor, Codex CLI and Gemini CLI.
+It finishes publishing the neon homepage to the hosted site while keeping the
+**2,406**-skill catalog at `/core`. Existing installation interfaces remain
+supported.
+
+### Start here
+
+- Install: `npx agentic-awesome-skills@17.8.4`
+- [Choose your tool](README.md#choose-your-tool)
+- [Best skills by tool](README.md#best-skills-by-tool)
+- [Bundles](docs/users/bundles.md)
+- [Workflows](docs/users/workflows.md)
+
+### Fixed
+
+- **Pages SearchAction gate** — expect WebSite SearchAction targets at
+  `/core/?q={search_term_string}` after the catalog moved off `/`.
+
+### Validation scope
+
+Protected source PR, release checks for v17.8.4, and the release-only Pages
+deploy from the immutable `v17.8.4` tag.
+
+---
+
+## [17.8.3] - 2026-09-20 - "Landing JSON-LD Identity for Pages"
+
+> Fixes neon landing SoftwareSourceCode/WebSite JSON-LD so the release-only
+> Pages SEO gate accepts `/` after the catalog moved to `/core`.
+
+A catalog-surface hotfix for Claude Code, Cursor, Codex CLI and Gemini CLI.
+It completes hosted deployment of the neon homepage while keeping the
+**2,406**-skill catalog at `/core`. Existing installation interfaces remain
+supported.
+
+### Start here
+
+- Install: `npx agentic-awesome-skills@17.8.3`
+- [Choose your tool](README.md#choose-your-tool)
+- [Best skills by tool](README.md#best-skills-by-tool)
+- [Bundles](docs/users/bundles.md)
+- [Workflows](docs/users/workflows.md)
+
+### Fixed
+
+- **Landing JSON-LD identities** — dedupe root `sameAs`, align WebSite URL shape,
+  and treat `/` as the brand landing while `/core` keeps rich catalog identity
+  checks required by the Pages SEO verifier.
+
+### Validation scope
+
+Protected source PR, release checks for v17.8.3, and the release-only Pages
+deploy from the immutable `v17.8.3` tag.
+
+---
+
+## [17.8.2] - 2026-09-20 - "Pages Deploy for Neon Landing"
+
+> Unblocks GitHub Pages for the neon AAS homepage by allowing `/core` in the
+> SEO sitemap verifier and verifying Core catalog metadata on `/core`.
+
+A catalog-surface hotfix for Claude Code, Cursor, Codex CLI and Gemini CLI.
+It finishes publishing the neon landing from #1527 / v17.8.1 onto the hosted
+site while keeping the **2,406**-skill catalog at `/core`. Existing installation
+interfaces remain supported.
+
+### Start here
+
+- Install: `npx agentic-awesome-skills@17.8.2`
+- [Choose your tool](README.md#choose-your-tool)
+- [Best skills by tool](README.md#best-skills-by-tool)
+- [Bundles](docs/users/bundles.md)
+- [Workflows](docs/users/workflows.md)
+
+### Fixed
+
+- **Pages SEO gate for `/core`** — treat `/core` as an allowed non-skill sitemap
+  route, assert the prerendered Core catalog page, and keep landing `/` on
+  WebPage discovery metadata so the release-only Pages deploy can ship the neon
+  homepage.
+- **Plugins coverage timeout** — raise the specialized plugins render test
+  timeout so release npm publication is not blocked by a slow CI worker.
+
+### Validation scope
+
+Source PR plus protected release checks for v17.8.2, including web-app SEO
+verification, coverage, CI, CodeQL, and the release-only Pages deploy from the
+immutable `v17.8.2` tag.
+
+---
+
+## [17.8.1] - 2026-09-20 - "Neon AAS Landing Homepage"
+
+> Ships a brand-first neon AAS homepage at `/` and moves the searchable catalog
+> to `/core`, with matching SEO, sitemap, and prerender routes.
+
+A catalog-surface release for Claude Code, Cursor, Codex CLI and Gemini CLI.
+It publishes the neon AAS landing experience (#1527) while keeping the
+**2,406**-skill catalog on Core. Existing installation interfaces remain
+supported.
+
+### Start here
+
+- Install: `npx agentic-awesome-skills@17.8.1`
+- [Choose your tool](README.md#choose-your-tool)
+- [Best skills by tool](README.md#best-skills-by-tool)
+- [Bundles](docs/users/bundles.md)
+- [Workflows](docs/users/workflows.md)
+
+### Added
+
+- **Neon AAS landing homepage (#1527)** — brand-first intro at `/` with install
+  hero, agent compatibility tiles, Core/Workbench/Plugins surfaces, guided
+  Search→Choose→Validate→Preview steps, and maintainer strip. The searchable
+  catalog now lives at `/core` with updated nav, SEO, sitemap, and prerender
+  routes.
+
+### Improved
+
+- Pages redirect bridge sitemap route lock bumped for `/core`.
+
+### Validation scope
+
+PR #1527 passed repository web-app tests and typecheck, protected CI
+(`pr-policy`, `pr-evidence`, `source-validation`, `artifact-preview`), CodeQL,
+dependency review, and maintainer attestation on the exact merge head, then
+canonical synchronization.
+
+---
+
+## [17.8.0] - 2026-09-20 - "OpenCode #126 Catalog Expansion and Jev Judgment Routing"
+
+> Imports 264 reviewed skills from opencode-skills-collection #126 across DevSec,
+> BugHunter, and starter bundles, plus `jev-use` for batched judgment-model
+> routing through MCP.
+
+A maintenance release for Claude Code, Cursor, Codex CLI and Gemini CLI.
+It merges the FrancoStino opencode-skills-collection #126 batch (#1512–#1517)
+and the community `jev-use` skill (#1511), refreshes catalog and plugin surfaces
+for **2,406** skills, and converges canonical indexes through the protected bot
+lane. Existing installation interfaces remain supported.
+
+### Start here
+
+- Install: `npx agentic-awesome-skills@17.8.0`
+- [Choose your tool](README.md#choose-your-tool)
+- [Best skills by tool](README.md#best-skills-by-tool)
+- [Bundles](docs/users/bundles.md)
+- [Workflows](docs/users/workflows.md)
+
+### Added
+
+- **OpenCode #126 batch (264 skills, #1512–#1517)** — docs-only DevSec compliance,
+  DevOps, infrastructure, and security skills; gated BugHunter assessment workflows;
+  and starter bundles (productivity, career-ops, geo/SEO, and related collections)
+  sourced from the MIT-licensed opencode-skills-collection #126 import, with
+  maintainer repairs for policy, provenance, and documentation-security gates.
+- **`jev-use` (#1511)** — routes enumerable no-text judgment steps (success checks,
+  option picks, risk gates) to the Jev judgment model through `jev_judge` and
+  `jev_gate` MCP tools, with explicit escalation back to the orchestrator for
+  steps that require generated text or non-enumerable choices.
+
+### Improved
+
+- Refreshed canonical indexes, catalogs, plugin mirrors, editorial bundles, and
+  web assets for the 2,406-skill release.
+
+### Validation scope
+
+PRs #1512–#1517 and #1511 passed maintainer attestation on their exact merge
+heads, repository validation, reference and documentation-security checks,
+protected CI, CodeQL, dependency review, and canonical synchronization.
+Tessl was unavailable for several heads; maintainer semantic review covered
+every changed canonical skill subtree.
+
+Thanks to @FrancoStino (#1512–#1517) for the opencode-skills-collection #126
+import and to @shitianfang (#1511) for `jev-use`.
+
+---
+
+## [17.7.0] - 2026-09-19 - "YYLO Ledger Skills Suite"
+
+> Adds seven community skills for YYLO Ledger task, wiki, workflow, and artifact
+> workflows plus the Ralph loop executor, with refreshed catalog surfaces.
+
+A maintenance release for Claude Code, Cursor, Codex CLI and Gemini CLI.
+It merges seven YYLO skills through the protected maintainer workflow, refreshes
+catalog and plugin surfaces for **2,141** skills, and closes a redundant Snyk
+dependency PR that violated the source-only contract. Existing installation
+interfaces remain supported.
+
+### Start here
+
+- Install: `npx agentic-awesome-skills@17.7.0`
+- [Choose your tool](README.md#choose-your-tool)
+- [Best skills by tool](README.md#best-skills-by-tool)
+- [Bundles](docs/users/bundles.md)
+- [Workflows](docs/users/workflows.md)
+
+### Added
+
+- `artifact-yylo`: capture and retrieve durable YYLO Ledger artifact Records with
+  secret-safe immutable evidence (source: `yylo-dev/yylo-skills`).
+- `ledger-tasks-yylo`: YYLO Ledger task lifecycle, dependencies, routing, and
+  registry-aware cross-project access.
+- `plan-ledger-tasks-yylo`: concise PDR plus implementation-sized Ledger tasks when
+  the user explicitly asks to plan work.
+- `ralph-loop-yylo`: execute one explicitly assigned Ledger task through the Ralph
+  loop to a validated queued commit (`risk: critical`; no push/deploy).
+- `understand-project-yylo`: read-only architecture and validation-loop inspection
+  before planning or implementation.
+- `wiki-yylo`: revision-safe YYLO wiki Records without direct Ledger storage edits.
+- `workflow-yylo`: validated workflow Records with explicit storage/execution/evidence
+  boundaries.
+
+### Improved
+
+- Refreshed canonical indexes, catalogs, plugin mirrors, editorial bundles, and
+  web assets for the 2,141-skill release.
+
+### Validation scope
+
+PR #1507 passed maintainer attestation at head `d588e6b5b8546bd6a45d32654cb1c9b05d858258`,
+repository validation, reference and documentation-security checks, protected CI,
+CodeQL, dependency review, package publication, and release-only Pages verification.
+Tessl was unavailable; maintainer semantic review covered all seven skill subtrees.
+
+Thanks to @FrancoStino (#1507) for the YYLO skills contribution.
+
+---
+
+## [17.6.0] - 2026-09-19 - "Weather Skills, Idea Evaluator, Google No-Code, and Anti-Slop Design"
+
+> Adds six reviewed skills (weather model and observation retrieval, multi-agent
+> idea evaluation, Google Forms automation, resumable implementation contracts,
+> and anti-slop UI engineering) and refreshes maintainer tooling.
+
+A maintenance release for Claude Code, Cursor, Codex CLI and Gemini CLI.
+It merges six skills through the protected maintainer workflow (including two
+weather-data skills and a maintainer-carried idea-evaluation bundle), refreshes
+catalog and plugin surfaces for **2,134** skills, and adds optional local Jev
+hints for maintainers only; existing installation interfaces remain supported.
+
+### Start here
+
+- Install: `npx agentic-awesome-skills@17.6.0`
+- [Choose your tool](README.md#choose-your-tool)
+- [Best skills by tool](README.md#best-skills-by-tool)
+- [Bundles](docs/users/bundles.md)
+- [Workflows](docs/users/workflows.md)
+
+### Added
+
+- `weather-model-data-fetching`: GRIB2 and public-archive weather model retrieval
+  with inventories, byte ranges, Herbie, provider fallbacks, and verified caching.
+- `weather-observation-fetching`: surface and upper-air observations from
+  authoritative APIs and archives with station identity, time, units, and quality
+  flags preserved.
+- `idea-evaluator`: multi-turn Pro/Con debate over an idea with a final verdict,
+  including bundled `idea-evaluator-pro` and `idea-evaluator-con` agent skills.
+- `google-no-code`: Google Forms plus Apps Script triggers for alerts, spreadsheet
+  logging, and dynamic questions without a separate code editor workflow.
+- `resumable-implementation-contracts`: repository-based execution contracts with
+  stable task IDs, evidence, checkpoints, and exact resume state across sessions.
+- `anti-slop-design`: community skill for curing AI frontend slop with token
+  archetypes and a seven-axis pre-ship quality gate (source: `wwewtech/anti-slop-design`).
+
+### Improved
+
+- Refreshed canonical indexes, catalogs, plugin mirrors, editorial bundles, and
+  web assets for the 2,134-skill release.
+- Bumped `express-rate-limit` in the Loki Mode todo example backend (8.6.2 → 8.7.0).
+- Optional maintainer-only TypeSafe Jev triage via `npm run maintainer:jev-hints` and
+  `docs/maintainers/jev-hints.md` (advisory; not a merge or CI gate).
+
+### Validation scope
+
+The source PRs passed maintainer attestation at exact head SHAs where required,
+repository validation, reference and documentation-security checks, protected CI,
+CodeQL, dependency review, package publication, and release-only Pages verification.
+Maintainer Jev output was used only to prioritize inspection; Tessl review or
+manual maintainer review remained authoritative for skill semantics.
+
+Thanks to @ShianMike (#1488, #1498), @WHOISABHISHEKADHIKARI (#1497), and @wwewtech
+(#1494) for their contributions, and to the maintainers for the carried
+`idea-evaluator` import (#1492).
+
+---
+
 ## [17.5.0] - 2026-09-18 - "Beatra Video Studio, Meteora DLMM Screening, and Catalog Validation Hardening"
 
 > Adds two reviewed skills (one official vendor catalog pointer, one read-only

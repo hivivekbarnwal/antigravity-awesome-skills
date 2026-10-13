@@ -31,6 +31,35 @@ update_readme = sys.modules["update_readme"]
 
 
 class SyncRepoMetadataTests(unittest.TestCase):
+    def test_agent_setup_commands_share_pins_and_preserve_surrounding_prose(self):
+        for host in ["codex", "claude"]:
+            content = "Introduction\n" + "\n".join(
+                f"<!-- aas-agent-setup:{host}:{phase} -->\nold command\n<!-- /aas-agent-setup -->"
+                for phase in ["preview", "approve", "plan", "install"]
+            ) + "\nClosing text"
+            updated = sync_repo_metadata.sync_agent_setup_guide(content, {"version": "19.5.0"})
+            self.assertTrue(updated.startswith("Introduction\n"))
+            self.assertTrue(updated.endswith("\nClosing text"))
+            self.assertNotIn("old command", updated)
+            self.assertIn(f"--host {host} --scope user --version 19.5.0", updated)
+            self.assertIn(f"--target {host}:project", updated)
+            self.assertIn('--backup-dir "$AAS_BACKUP"', updated)
+            destination = ".agents" if host == "codex" else ".claude"
+            self.assertIn(f"--destination \"$AAS_PROJECT/{destination}/skills\"", updated)
+            self.assertEqual(sync_repo_metadata.sync_agent_setup_guide(updated, {"version": "19.5.0"}), updated)
+            upgraded = sync_repo_metadata.sync_agent_setup_guide(updated, {"version": "20.0.0"})
+            self.assertNotIn("19.5.0", upgraded)
+            self.assertIn("--package=agentic-awesome-skills@20.0.0", upgraded)
+            self.assertIn("--version 20.0.0", upgraded)
+            self.assertNotIn(" stack apply", upgraded)
+
+    def test_agent_setup_sync_matches_both_committed_guides(self):
+        metadata = {"version": __import__("json").loads((REPO_ROOT / "package.json").read_text())["version"]}
+        for slug in ["codex-cli-skills", "claude-code-skills"]:
+            content = (REPO_ROOT / "docs" / "users" / f"{slug}.md").read_text()
+            self.assertEqual(sync_repo_metadata.sync_agent_setup_guide(content, metadata), content)
+            self.assertEqual(content.count("<!-- /aas-agent-setup -->"), 4)
+
     def test_sync_curated_docs_updates_counts_and_versions(self):
         metadata = {
             "version": "8.4.0",
@@ -172,6 +201,35 @@ The 1,273+ reusable `SKILL.md` playbooks, specialized plugins, bundles, workflow
             self.assertIn("1,304+ skill", jetski_cortex)
             self.assertNotIn("1,1", jetski_cortex)
 
+    def test_compact_readme_sync_keeps_video_and_updates_all_counts(self):
+        current = (REPO_ROOT / "README.md").read_text(encoding="utf-8")
+        metadata = {
+            "version": "19.1.0",
+            "core_included": True,
+            "core_included_from_major": 15,
+            "total_skills": 2500,
+            "total_skills_label": "2,500+",
+            "star_badge_count": "47%2C000%2B",
+            "star_milestone": "47,000+",
+            "star_celebration": "47k",
+            "stars": 46975,
+            "updated_at": "2026-09-27T09:49:22+00:00",
+        }
+        once = sync_repo_metadata.sync_readme_copy(update_readme.apply_metadata(current, metadata), metadata)
+        twice = sync_repo_metadata.sync_readme_copy(update_readme.apply_metadata(once, metadata), metadata)
+        self.assertEqual(once, twice)
+        self.assertIn("## Watch the Introduction", once)
+        self.assertIn("https://github.com/user-attachments/assets/02aa20ca-c3bb-4984-807e-7b06ef77e785", once)
+        self.assertIn("library of 2,500+ installable", once)
+        self.assertIn("## Browse 2,500+ Skills", once)
+        self.assertIn("[Browse 2,500+ Skills](#browse-2500-skills)", once)
+        self.assertIn("--package=agentic-awesome-skills@19.1.0", once)
+        self.assertIn("--release 19.1.0", once)
+        self.assertIn("## Top Contributors", once)
+        self.assertIn("## Repo Contributors", once)
+        self.assertNotIn("## Quick FAQ", once)
+        self.assertNotIn("## Why This Repo", once)
+
     def test_build_about_description_uses_live_skill_count(self):
         description = sync_repo_metadata.build_about_description(
             {"total_skills_label": "1,304+"}
@@ -258,7 +316,7 @@ The 1,273+ reusable `SKILL.md` playbooks, specialized plugins, bundles, workflow
         self.assertEqual(repo_edit_args[:4], ["gh", "repo", "edit", "sickn33/agentic-awesome-skills"])
         self.assertIn("--description", repo_edit_args)
         self.assertIn("--homepage", repo_edit_args)
-        self.assertIn("https://sickn33.github.io/agentic-awesome-skills/", repo_edit_args)
+        self.assertIn("https://aaskills.tech/", repo_edit_args)
 
         self.assertEqual(topics_args[:4], ["gh", "api", "repos/sickn33/agentic-awesome-skills/topics", "--method"])
         self.assertIn("PUT", topics_args)

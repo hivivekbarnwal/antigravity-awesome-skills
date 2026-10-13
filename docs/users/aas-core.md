@@ -31,7 +31,7 @@ AAS MCP does not scan the repository and does not decide which skills are best. 
 > **Release boundary:** AAS Core landed after release 14.6.0. Use an exact Core-capable release rather than an unreviewed moving tag.
 
 ```bash
-npm exec --yes --ignore-scripts --package=agentic-awesome-skills@17.5.0 -- aas mcp configure \
+npm exec --yes --ignore-scripts --package=agentic-awesome-skills@19.5.0 -- aas mcp configure \
   --host codex \
   --scope user \
   --config /absolute/path/to/codex/config.toml \
@@ -73,13 +73,28 @@ Each candidate exposes provenance, license, declared risk and setup information,
 
 Workbench downloads the public catalog only after you open discovery. Artifact review does not need that download and never sends imported artifacts or goals. The goal remains in page memory; only explicitly shortlisted IDs use the existing browser-local shortlist. There is no usage measurement, installation diary, or centralized collection.
 
-In the [hosted catalog](https://sickn33.github.io/agentic-awesome-skills/), add candidate skills to your shortlist. Open the comparison above the search results to inspect descriptions, declared risk, manual setup, plugin packaging, source, and license metadata. Missing metadata is shown explicitly; it does not make a skill unavailable to Core.
+In the [hosted catalog](https://aaskills.tech/), add candidate skills to your shortlist. Open the comparison above the search results to inspect descriptions, declared risk, manual setup, plugin packaging, source, and license metadata. Missing metadata is shown explicitly; it does not make a skill unavailable to Core.
 
 Enter the project outcome and select Codex or Claude as the project target, preview the brief, then copy it into your coding agent with the local AAS MCP configured. The brief includes exact candidate IDs and the catalog version. It asks the agent to inspect the complete catalog and explain its final selection, including any additions or omissions. A shortlist is input to that review, not an approved stack.
 
 The catalog stores shortlisted IDs in browser-local storage. The goal and brief remain in page memory until copied. Workbench does not consume the brief: after the agent returns a manifest and you review it, persist and validate the manifest, generate the immutable CLI plan, then explicitly import those two artifacts into Workbench. If clipboard access is unavailable, select the brief text from its preview.
 
 ### Start directly in the coding agent
+
+When a Core session starts, the agent must explicitly offer an optional guided
+intake and say that you can skip the questions and let it work autonomously.
+If you explicitly choose autonomy, the agent skips the introductory questions
+and begins its normal project inspection. If you accept the guided intake, it
+should ask a short set of questions about the desired outcome, whether you are
+starting from scratch, adding a feature, or fixing a problem, your languages or
+frameworks, important constraints, and how you will recognize success. The
+agent may ask additional focused questions when the answers and project
+evidence leave a material ambiguity; it should explain why the question matters
+and stop once it has enough context.
+
+Guided answers provide context for project understanding and the eventual
+profile. They do not select skills automatically and do not replace repository
+inspection or the capability-coverage contract below.
 
 Give the agent the desired outcome and constraints, and leave selection judgment with the agent:
 

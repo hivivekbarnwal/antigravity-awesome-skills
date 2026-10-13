@@ -1,5 +1,7 @@
-import { useMemo, useState } from 'react';
-import { Link } from 'react-router';
+import { useEffect, useMemo, useState } from 'react';
+import { Link, useLocation } from 'react-router';
+import { CatalogNavigation } from '../components/CatalogNavigation';
+import './CatalogExperience.css';
 import { Icon } from '../components/ui/Icon';
 import { specializedPlugins, type SpecializedPlugin } from '../data/specializedPlugins';
 import { usePageMeta } from '../hooks/usePageMeta';
@@ -7,12 +9,18 @@ import { buildPluginsMeta, toIndexableRoutePath } from '../utils/seo';
 import { releaseFileUrl } from '../utils/catalogRelease';
 
 const pluginFolderUrl = (pluginId: string) => releaseFileUrl(`plugins/agentic-bundle-${pluginId}`).replace('/blob/', '/tree/');
-const pluginDocUrl = () => releaseFileUrl('docs/users/plugins.md');
-const bundleDocUrl = () => releaseFileUrl('docs/users/bundles.md');
-const gettingStartedDocUrl = () => releaseFileUrl('docs/users/getting-started.md');
+const pluginDocUrl = () => `${import.meta.env.BASE_URL}docs/plugins/`;
+const bundleDocUrl = () => `${import.meta.env.BASE_URL}docs/bundles/`;
+const gettingStartedDocUrl = () => `${import.meta.env.BASE_URL}docs/getting-started/`;
 
 export function Plugins(): React.ReactElement {
   const [query, setQuery] = useState('');
+  const { hash } = useLocation();
+  useEffect(() => {
+    const plugin = specializedPlugins.find((entry) => `#${entry.id}` === hash);
+    if (plugin) document.getElementById(plugin.id)?.scrollIntoView({ block: 'start' });
+    else if (!hash) window.scrollTo(0, 0);
+  }, [hash]);
   usePageMeta(buildPluginsMeta(specializedPlugins.length));
 
   const filtered = useMemo(() => {
@@ -25,14 +33,15 @@ export function Plugins(): React.ReactElement {
 
   return (
     <div className="plugins-page">
+      <CatalogNavigation active="packs" />
       <header className="plugins-hero">
         <h1>Choose the focused AAS plugin for the job.</h1>
         <p>AAS specialized plugins are domain-specific distributions of the full skill library — smaller scope, clearer activation, faster starts.</p>
         <p>These bundles contain skill instructions. External tools, service accounts and connectors must be configured separately. Choose the skills relevant to your project; a bundle is not a requirement to use every included tool.</p>
         <div>
-          <a href={pluginDocUrl()} target="_blank" rel="noreferrer">Read plugin install guide <Icon name="arrowRight" size={16} /></a>
-          <Link to="/">Browse full skill catalog <Icon name="arrowRight" size={16} /></Link>
-          <a href={gettingStartedDocUrl()} target="_blank" rel="noreferrer">Install one skill with GitHub CLI</a>
+          <a href={pluginDocUrl()}>Read plugin install guide <Icon name="arrowRight" size={16} /></a>
+          <Link to="/core">Browse full skill catalog <Icon name="arrowRight" size={16} /></Link>
+          <a href={gettingStartedDocUrl()}>Install one skill with GitHub CLI</a>
         </div>
       </header>
 
@@ -107,7 +116,7 @@ function PluginRow({ plugin }: { plugin: SpecializedPlugin }): React.ReactElemen
       </div>
       <div role="cell" className="plugin-row__actions">
         <a href={pluginFolderUrl(plugin.id)} target="_blank" rel="noreferrer">View plugin</a>
-        <a href={bundleDocUrl()} target="_blank" rel="noreferrer">Bundle notes</a>
+        <a href={bundleDocUrl()}>Bundle notes</a>
       </div>
     </article>
   );

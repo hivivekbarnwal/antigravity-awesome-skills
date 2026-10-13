@@ -118,7 +118,7 @@ Before ANY commit that adds/modifies skills, run the chain:
     ```bash
     npm run sync:repo-state
     ```
-    This wraps `chain + sync:web-assets + sync:contributors + audit:consistency` for a full local repo-state refresh; `chain` already generates the catalog.
+    This wraps `chain + sync:web-assets + sync:contributors + sync:top-contributors + audit:consistency` for a full local repo-state refresh; `chain` already generates the catalog.
     The scheduled GitHub Actions workflow `Repo Hygiene` runs this same sweep weekly to catch slow drift on `main`.
     It also enforces the frozen validation warning budget using the current maximum in `tools/config/validation-budget.json` (currently zero).
 
@@ -173,9 +173,11 @@ Changed-skill evidence resolves canonical ownership from the changed path's ance
 
 **Required-CI execution contract:**
 
-- Source-only classification counts the destination of a Git copy as changed; its unchanged origin is not a generated-file mutation. Renames still count both paths. Raw records, blob safety, fork classification and exact-head review remain enforced independently.
+The canonical maintainer skill contains the full [Current CI workflow](../skills/antigravity-maintainer-batch-release/SKILL.md#current-ci-workflow) and [SkillSpector report interpretation](../skills/antigravity-maintainer-batch-release/SKILL.md#skillspector-advisory-ci). `pr-policy` starts `source-validation` and `pr-evidence` in parallel; `artifact-preview` depends on `source-validation`, while the separate PR-only SkillSpector workflow waits for the same PR's exact-head `pr-evidence` result. Semantic review is a separate workflow. SkillSpector remains advisory, including for skill-only PRs; do not infer a complete scan from a green job, bootstrap, empty plan, or zero exit. A nonzero scanner exit can report findings rather than a scanner failure.
 
-- `pr-policy` executes the fork-safety intake with code and dependencies materialized from the exact protected base before the dependent required jobs start. The classifier's `NODE_PATH` must point only at that protected-base worktree, never at pull-request-controlled `node_modules`. This is an early, unprivileged rejection of unsafe fork diffs; `merge:batch` still recomputes the trusted decision and remains the only fork-run approval and merge authority. The allowlist also covers browser source under `apps/web-app/src/**` (`.css`, `.ts`, `.tsx`), which cannot change dependencies, lockfiles, build configuration or generated assets: those fork runs may be approved, but the merge still requires an exact-head maintainer attestation.
+- Source-only classification counts the destination of a Git copy as changed; its unchanged origin is not a generated-file mutation. Renames still count both paths. The fork classifier treats a copy origin as read-only in the same way: Git pairs a copy by similarity against any path already present in the base tree, so the origin's path class is not author-controlled and the same new canonical skill can otherwise pass or fail depending on which existing file Git happened to choose. Copy origins remain subject to raw-path, mode, object, size and total-budget checks, and editing, renaming or deleting that origin still fails closed. Raw records, blob safety, fork classification and exact-head review remain enforced independently.
+
+- `pr-policy` executes the fork-safety intake with code and dependencies materialized from the exact protected base before the dependent required jobs start. The classifier's `NODE_PATH` must point only at that protected-base worktree, never at pull-request-controlled `node_modules`. This is an early, unprivileged rejection of unsafe fork diffs; `merge:batch` still recomputes the trusted decision and remains the only fork-run approval and merge authority. The allowlist also covers browser source under `apps/web-app/src/**` (`.css`, `.ts`, `.tsx`), which cannot change dependencies, lockfiles, build configuration or generated assets: those fork runs may be approved, but the merge still requires an exact-head maintainer attestation. The approvable run allowlist additionally includes the PR-only `skillspector-advisory` workflow: `contents: read` and `checks: read`, no secrets, every action pinned to a full SHA, and its first job only waits for the exact-head `pr-evidence` result. A PR-only advisory workflow that is absent from the allowlist leaves every fork skill PR stuck on `action_required`, so keep the list aligned whenever a read-only fork workflow is added or renamed.
 - The reported `impact_profile` is shadow telemetry only. It does not skip, downgrade, or satisfy any required check.
 - For an ordinary source PR, `source-validation` performs the generated-state refresh once and publishes a manifest bound to the exact repository, workflow/run attempt, and PR head SHA. `artifact-preview` verifies that manifest and its digest; it does not regenerate the same source-PR tree.
 - For the protected canonical-sync PR, `pr-policy` reproduces the exact tree from trusted `main`, `source-validation` records a lightweight boundary, and `artifact-preview` confirms that regeneration leaves no drift. The merged commit still receives the explicit final `main` CI and CodeQL runs.
@@ -259,7 +261,7 @@ We used this flow for PRs [#220](https://github.com/sickn33/agentic-awesome-skil
 **Maintainer shortcut for batched PRs:**
 
 - Use `npm run merge:batch -- --prs 450,449,446,451` to automate the ordered maintainer flow for multiple PRs. See [docs/maintainers/merge-batch.md](../docs/maintainers/merge-batch.md) for the short usage guide.
-- Pages is release-only: ordinary pushes to `main` never deploy it. Dispatch `.github/workflows/pages.yml` only from the exact immutable `vX.Y.Z` tag at an approved publication gate, never from `main` or another branch. Canonical-sync merges still use `--skip-pages` and carry `[skip pages]` as a durable audit marker; the four routine app-bound checks and CodeQL remain enforced. The supported Core preview uses the targeted packed smoke workflow; retired certified-v1 verifier harnesses are not part of the repository workflow.
+- Pages supports an explicit dispatch from protected `main` after source and canonical-sync work is complete, as well as the exact immutable `vX.Y.Z` release-tag dispatch. Main deployments must select `deployment_target=main` and match the current `main` SHA both before build and immediately before deployment; stale runs fail closed. Release deployments select `deployment_target=release` and retain package/tag/published-release verification. Canonical-sync merges keep `--skip-pages` and `[skip pages]` as durable audit markers and do not dispatch Pages; the four routine app-bound checks and CodeQL remain enforced. The supported Core preview uses the targeted packed smoke workflow; retired certified-v1 verifier harnesses are not part of the repository workflow.
 - The script keeps the GitHub-only squash merge rule, handles guarded fork-run approvals, waits on required checks bound to the current PR and exact head, and hands contributor/generated drift to the protected canonical-sync lane. It does not run `sync:contributors` itself, mutate PR metadata, close/reopen PRs, or retry base drift; rerun it from fresh `origin/main` whenever the base or head moves. Sensitive repository-wide source changes use the same-repository exception only when the PR is authored by the repository owner and its exact full head SHA is attested; collaborator-authored sensitive PRs remain under the external safety policy.
 - It is intentionally not a conflict resolver. If a PR is conflicting, stop and follow the manual conflict playbook.
 
@@ -289,6 +291,7 @@ After every source batch, including a one-PR batch, verify that both README cred
 
 - `### Community Contributors` / `## Credits & Sources` for external repositories referenced by the merged work
 - `## Repo Contributors` for the human contributor list
+- `## Top Contributors` for the two ranked leaderboards, recomputed by `sync:top-contributors`
 
 Do not run a local generator after every individual merge. The trusted `main` workflow coalesces contributor and generated drift in the protected canonical-sync PR after the source batch.
 
@@ -299,7 +302,7 @@ Do not run a local generator after every individual merge. The trusted `main` wo
     ```
 
 2.  **Verify the canonical-sync handoff**:
-    - Let the trusted workflow run `sync:repo-state`, which includes `sync:contributors`, and open or update `automation/canonical-repo-state` when drift exists.
+    - Let the trusted workflow run `sync:repo-state`, which includes `sync:contributors` and `sync:top-contributors`, and open or update `automation/canonical-repo-state` when drift exists.
     - Verify that the protected canonical PR contains the expected `## Repo Contributors` update while preserving custom bot/app links.
     - Do not commit generated or contributor drift to an ordinary source PR and do not push it directly to `main`.
 
@@ -368,6 +371,8 @@ Locations to check:
 - **Credits & Sources**: This whole area is for **external repos and upstream sources**, split into Official vs Community.
 - **Repo Contributors**: Use this for **Pull Requests**.
   - _Rule_: "This user sent a PR." -> Add to `## Repo Contributors`.
+- **Top Contributors**: Two generated leaderboards: commit count and canonical skills introduced per contributor, both recomputed by `sync:top-contributors` and published through the canonical-sync PR.
+  - _Rule_: never hand-edit these tables; fix the generator or its excluded-account list instead.
 
 **Merge rule:** after every PR merge, check **both** `### Community Contributors` and `## Repo Contributors`. A merge is not fully done until both sections are either confirmed unchanged or updated and pushed.
 
@@ -402,7 +407,7 @@ Rules:
 
 Reject any PR that fails this:
 
-1.  **Metadata**: Has `name`, `description`?
+1.  **Metadata**: Has `name` and a task-specific `description`? `npm run validate` rejects empty descriptions and the known skill-template placeholder.
 2.  **Safety**: `risk: offensive` used for red-team tools?
 3.  **Clarity**: Does it say _when_ to use it?
 4.  **Examples**: Copy-pasteable code blocks?
@@ -476,7 +481,7 @@ Preflight verification → Changelog → repository/plugin convergence → `npm 
 6.  **Run the mandatory full-release-alignment gate**:
     - Re-run `npm run sync:release-state`, `npm run plugin-compat:check`, and `npm run bundles:check`; require a clean, idempotent second pass.
     - Confirm `package.json`, `package-lock.json`, generated registries and offline catalog, tracked web assets, `.agents/plugins/marketplace.json`, `.claude-plugin/plugin.json`, `.claude-plugin/marketplace.json`, every published Codex/Claude plugin manifest, and every eligible Agent Plugins editorial-bundle manifest are regenerated and versioned as `X.Y.Z`.
-    - Bind the local/remote `main`, tag, GitHub Release, npm version and intended dist-tag, required CI, CodeQL, and release-only Pages deployment to the exact released commit. Verify live `llms.txt`, `skills.json`, catalog/plugin routes, and the legacy bridge.
+    - Bind the local/remote `main`, tag, GitHub Release, npm version and intended dist-tag, required CI, CodeQL, and release-tag Pages deployment to the exact released commit. Verify live `llms.txt`, `skills.json`, catalog/plugin routes, and the legacy bridge.
     - Discover every existing AAS MCP entry from real local host configuration. Update each existing host with the published package's digest-bound two-pass `aas mcp configure` flow, pin `agentic-awesome-skills@X.Y.Z` and `--version X.Y.Z`, preserve a backup, restart or reconnect the client, and prove `initialize` plus `tools/list` reports `X.Y.Z`. Never create an absent host entry without separate authorization.
     - Fetch `origin/main` again after automation settles, fast-forward local `main`, require `main...origin/main` to be `0 0`, and repeat the no-drift, public-surface, and MCP parity checks. Any mismatch or inaccessible configured host keeps the release incomplete.
 
